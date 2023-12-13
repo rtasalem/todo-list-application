@@ -1,28 +1,15 @@
-const Task = require("../model/Task"); // Adjust the path based on your project structure
-const sequelize = require("../server");
+const express = require("express");
+const router = express.Router();
+const TaskService = require("../service/TaskServce");
 
-sequelize
-    .authenticate()
-    .then(() => {
-        console.log("Connection has been established successfully.");
+router.post('/todos', async (req, res) => {
+    try {
+        const taskData = req.body;
+        const newTask = await TaskService.createTask(taskData);
+        res.status(201).json(newTask);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
-        Task.create({
-            name: "gergbonrtgovien",
-            description: "bcioebvieiwencinecvrv",
-            endDate: 2023 - 12 - 25,
-            completed: true,
-            listOfTasksId: null,
-            mainListId: 1,
-            mediaBlobId: null,
-            taskPriorityId: null
-        })
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((error) => {
-                console.error("Failed to create a new record : ", error);
-            });
-    })
-    .catch((error) => {
-        console.error("Unable to connect to the database: ", error);
-    });
+module.exports = router;
