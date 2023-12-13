@@ -23,7 +23,7 @@ const Task = sequelize.define(
 sequelize
     .sync()
     .then(() => {
-        console.log("**************Task model synced successfully!");
+        console.log("Task model synced sucessfully.");
     })
     .catch((error) => {
         console.error("Unable to sync Task model: ", error);
