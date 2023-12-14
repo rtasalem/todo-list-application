@@ -7,7 +7,7 @@ sequelize
     console.log("Connection has been established successfully.");
 
     User.create({
-      username: "PAK",
+      username: "PAmghmyK",
       password: "123",
       first_name: "Bobby",
       last_name: "",

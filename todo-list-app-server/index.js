@@ -4,7 +4,8 @@ const TaskController = require("../todo-list-app-server/controller/TaskControlle
 
 // Middlewares
 app.use(express.json());
-app.use('/tasks', TaskController);
+
+app.use('/api/v1/tasks', TaskController);
 
 
 app.listen(5001, () => {
