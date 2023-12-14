@@ -1,0 +1,90 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica, Arial, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 35px;
+    text-transform: capitalize;
+}
+
+h2 {
+    font-size: 25px;
+}
+
+.app {
+    background-color: white;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    padding: 10px;
+    width: 800px;
+    margin-top: 50px;
+}
+
+.list-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+}
+
+.button-container button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border-radius: 12px;
+}
+
+/* Add a To-Do */
+.add-todo {
+    width: 100%;
+    padding: 10px;
+}
+
+.form-container {
+    display: flex;
+    align-items: center;
+}
+
+.form-container form {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.form-container input {
+    width: 450px;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 0;
+    font-style: italic;
+    background-color: #f5f5f5;
+}
+
+.form-container button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border-radius: 12px;
+}
+
+/* IconBar */
+.icon-bar-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+}
+
+.icon {
+    font-size: 25px;
+    cursor: pointer;
+    margin: 0 10px;
+}
