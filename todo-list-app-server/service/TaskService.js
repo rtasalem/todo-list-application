@@ -64,15 +64,10 @@ const TaskService = {
             if (!task) {
                 throw new Error("Task not found.");
             }
-            const deletedTask = await Task.destory({ where: { id } });
-            if (deletedTask) {
-                return { message: "Task successfully deleted." };
-            } else {
-                throw new Error("Error deleting task.");
-            }
+            await task.destroy();
+            return { message: "Task successfully deleted." }
         } catch (err) {
             console.error(err.message);
-            throw err;
         }
     }
 }
