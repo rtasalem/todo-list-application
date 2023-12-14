@@ -1,17 +1,26 @@
-const Sequelize = require("sequelize");
-const { Op, DataTypes } = Sequelize;
-const sequelize = require("../server");
+const { DataTypes } = require("sequelize");
+const sequelize = require("../database/sequelize");
 
-// Define the User model
 const Task = sequelize.define(
   "Task",
   {
-    name: DataTypes.STRING,
-    description: DataTypes.STRING,
+    id: {
+      type: DataTypes.BIGINT,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+    },
+    description: DataTypes.TEXT,
     endDate: DataTypes.DATE,
-    completed: DataTypes.BOOLEAN,
-    listOfTasksId: DataTypes.BIGINT,
-    mainListId: DataTypes.BIGINT,
+    completed: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    taskGroupId: DataTypes.BIGINT,
+    taskListId: DataTypes.BIGINT,
     mediaBlobId: DataTypes.BIGINT,
     taskPriorityId: DataTypes.BIGINT,
   },

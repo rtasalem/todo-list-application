@@ -1,21 +1,21 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../database/sequelize");
 
-const TaskPriority = sequelize.define(
-  "TaskPriority",
+// Define the User model
+const TaskList = sequelize.define(
+  "TaskList",
   {
     id: {
       type: DataTypes.BIGINT,
       primaryKey: true,
       autoIncrement: true,
     },
-
-    name: DataTypes.STRING,
-    color: DataTypes.STRING,
+    userId: DataTypes.BIGINT,
     taskId: DataTypes.BIGINT,
+    listId: DataTypes.BIGINT,
   },
   {
-    tableName: "TaskPriority",
+    tableName: "TaskList",
     timestamps: false,
   }
 );
@@ -23,10 +23,10 @@ const TaskPriority = sequelize.define(
 sequelize
   .sync()
   .then(() => {
-    console.log("Task Priority model synced successfully!");
+    console.log("Main List model synced successfully!");
   })
   .catch((error) => {
-    console.error("Unable to sync Task Priority model: ", error);
+    console.error("Unable to sync Main List model: ", error);
   });
 
-module.exports = TaskPriority;
+module.exports = TaskList;
