@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const TaskService = require("../service/TaskService");
 
+// GET all tasks:
 router.get('/', async (req, res) => {
     try {
         const tasks = await TaskService.getAllTasks();
@@ -11,6 +12,7 @@ router.get('/', async (req, res) => {
     }
 });
 
+// GET task by id:
 router.get('/:id', async (req, res) => {
     const id = req.params.id;
     try {
@@ -21,6 +23,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+// POST create task:
 router.post('/', async (req, res) => {
     const taskData = req.body;
     try {
@@ -31,6 +34,7 @@ router.post('/', async (req, res) => {
     }
 });
 
+// UPDATE task:
 router.put('/:id', async (req, res) => {
     const id = req.params.id;
     const updatedTask = req.body;
@@ -42,7 +46,8 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-router.delete('/:id', async (req, res) => {
+// DELETE task:
+router.delete('/tasks:id', async (req, res) => {
     const id = req.params.id;
     try {
         const result = await TaskService.deleteTask(id);

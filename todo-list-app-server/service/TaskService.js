@@ -1,7 +1,7 @@
 const Task = require("../model/Task");
 
-// Create a new task:
 const TaskService = {
+    // Get all tasks:
     async getAllTasks() {
         try {
             const tasks = await Task.findAll();
@@ -11,6 +11,7 @@ const TaskService = {
         }
     },
 
+    // Get task by id:
     async getTaskById(id) {
         try {
             const task = await Task.findByPk(id);
@@ -23,6 +24,7 @@ const TaskService = {
         }
     },
 
+    // Create task:
     async createTask({ name, description, endDate, completed, listOfTasksId, mainListId, mediaBlobId, taskPriorityId }) {
         try {
             const newTask = await Task.create({
@@ -41,6 +43,7 @@ const TaskService = {
         }
     },
 
+    // Update task:
     async updateTask(id, updatedTaskData) {
         try {
             const task = await Task.findByPk(id);
@@ -54,6 +57,7 @@ const TaskService = {
         }
     },
 
+    // Delete task:
     async deleteTask(id) {
         try {
             const task = await Task.findByPk(id);

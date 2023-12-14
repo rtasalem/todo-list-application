@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const TaskController = require("../todo-list-app-server/controller/TaskController");
+const TaskController = require("./controller/TaskController");
 
 // Middlewares
 app.use(express.json());
