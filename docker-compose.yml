@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:16.1
+    volumes:
+      - todo-postgres-data:/var/lib/psql/data
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_DB: todo-app
+      POSTGRES_USER: fdmdev
+    ports:
+      - 2345:5432
+    networks:
+      - todo-app
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - 3000:3000
+    working_dir: /usr/app
+    volumes:
+      - ./backend:/usr/app
+    environment:
+      DB_HOST: postgres
+      DB_NAME: todo-app
+      DB_USER: fdmdev
+      DB_PORT: 5432
+    networks:
+      - todo-app
+    depends_on:
+      - postgres
+
+volumes:
+  todo-postgres-data:
+
+networks:
+  todo-app:
+    external: true

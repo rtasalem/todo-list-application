@@ -18,7 +18,7 @@ const MainList = sequelize.define(
 sequelize
   .sync()
   .then(() => {
-    console.log("**************Main List model synced successfully!");
+    console.log("Main List model synced successfully!");
   })
   .catch((error) => {
     console.error("Unable to sync Main List model: ", error);
