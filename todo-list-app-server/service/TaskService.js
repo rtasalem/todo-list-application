@@ -58,16 +58,21 @@ const TaskService = {
     },
 
     // Delete task:
-    async deleteTask(id) {
+    async deleteTaskById(id) {
         try {
             const task = await Task.findByPk(id);
             if (!task) {
                 throw new Error("Task not found.");
             }
-            return task;
+            const deletedTask = await Task.destory({ where: { id } });
+            if (deletedTask) {
+                return { message: "Task successfully deleted." };
+            } else {
+                throw new Error("Error deleting task.");
+            }
         } catch (err) {
             console.error(err.message);
-
+            throw err;
         }
     }
 }
