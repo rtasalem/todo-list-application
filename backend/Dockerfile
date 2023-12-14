@@ -1,10 +1,11 @@
-FROM node:21.1
+FROM node:14
 
 WORKDIR /usr/app
 
-COPY backend/package*.json ./
+COPY backend/package.json ./
+COPY backend/package-lock.json ./
 
-RUN npm install
+RUN npm install --production=false
 
 COPY backend/ ./
 

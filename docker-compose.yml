@@ -15,13 +15,25 @@ services:
       - todo-app
     restart: unless-stopped
 
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@fdmgroup.com"
+      PGADMIN_DEFAULT_PASSWORD: "abc1234"
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    ports:
+      - "8080:80"
+    networks:
+      - todo-app
+    restart: unless-stopped
+
   backend:
     build:
       context: .
       dockerfile: backend/Dockerfile
     ports:
       - 3000:3000
-    working_dir: /usr/app
     volumes:
       - ./backend:/usr/app
     environment:
@@ -29,6 +41,7 @@ services:
       DB_NAME: todo-app
       DB_USER: fdmdev
       DB_PORT: 5432
+    working_dir: /usr/app
     networks:
       - todo-app
     depends_on:
@@ -39,4 +52,3 @@ volumes:
 
 networks:
   todo-app:
-    external: true

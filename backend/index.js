@@ -7,7 +7,7 @@ const PORT = 3000;
 const app = express();
 
 app.use(express.json());
-app.use("/todos", TaskController);
+//app.use("/todos", TaskController);
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
