@@ -6,7 +6,7 @@ const AddTodoIconBar = () => {
 
   return (
     <div>
-      <IconBar icons={iconArray} className="custom-icon-bar" />
+      <IconBar icons={iconArray} />
     </div>
   );
 };

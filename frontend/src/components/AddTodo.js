@@ -7,7 +7,6 @@ const AddTodo = () => {
             <div className="form-container">
                 <form>
                     <input type="text" placeholder="What do you need to-do?" />
-                    <button type="submit">Add</button>
                 </form>
                 <div className="icon-bar-container">
                     <AddTodoIconBar />

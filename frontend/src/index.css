@@ -46,12 +46,12 @@ h2 {
 /* Add a To-Do */
 .add-todo {
     width: 100%;
-    padding: 10px;
 }
 
 .form-container {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .form-container form {
@@ -78,13 +78,35 @@ h2 {
 /* IconBar */
 .icon-bar-container {
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    padding: 10px;
+}
+
+.icon-bar-container .icon {
+    font-size: 25px;
+    cursor: pointer;
+    margin: 0 10px;
 }
 
 .icon {
     font-size: 25px;
     cursor: pointer;
     margin: 0 10px;
+}
+
+/* Search */
+.search {
+    width: 100%;
+}
+
+.search form-container {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.search input {
+    width: 575px;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
 }
