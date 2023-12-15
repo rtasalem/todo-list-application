@@ -1,13 +1,8 @@
-const { Sequelize, DataTypes } = require("sequelize");
+const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize(
-  "hello_world_db",
-  "DATABASE_USERNAME",
-  "DATABASE_PASSWORD",
-  {
-    host: "DATABASE_HOST",
-    dialect: "mysql",
-  }
-);
+const sequelize = new Sequelize("todo-app", "fdmdev", "admin", {
+  host: "postgres",
+  dialect: "postgres",
+});
 
 module.exports = sequelize;

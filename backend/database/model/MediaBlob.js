@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const sequelize = require("../database/sequelize");
+const sequelize = require("../sequelize");
 
 const MediaBlob = sequelize.define(
   "MediaBlob",
@@ -21,7 +21,6 @@ const MediaBlob = sequelize.define(
       type: DataTypes.STRING(5),
       allowNull: false,
     },
-    taskId: DataTypes.BIGINT,
   },
   {
     tableName: "MediaBlob",
@@ -30,12 +29,12 @@ const MediaBlob = sequelize.define(
 );
 
 sequelize
-  .sync()
+  .sync({ force: true })
   .then(() => {
-    console.log("Media Blob model synced successfully!");
+    console.log("MediaBlob model synced successfully!");
   })
   .catch((error) => {
-    console.error("Unable to sync Media Blob model: ", error);
+    console.error("Unable to sync MediaBlob model: ", error.message);
   });
 
 module.exports = MediaBlob;

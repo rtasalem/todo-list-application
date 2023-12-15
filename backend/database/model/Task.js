@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const sequelize = require("../database/sequelize");
+const sequelize = require("../sequelize");
 
 const Task = sequelize.define(
   "Task",
@@ -19,10 +19,6 @@ const Task = sequelize.define(
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
-    taskGroupId: DataTypes.BIGINT,
-    taskListId: DataTypes.BIGINT,
-    mediaBlobId: DataTypes.BIGINT,
-    taskPriorityId: DataTypes.BIGINT,
   },
   {
     tableName: "Task",
@@ -31,12 +27,12 @@ const Task = sequelize.define(
 );
 
 sequelize
-  .sync()
+  .sync({ force: true })
   .then(() => {
-    console.log("Task model synced sucessfully.");
+    console.log("Task model synced successfully!");
   })
   .catch((error) => {
-    console.error("Unable to sync Task model: ", error);
+    console.error("Unable to sync Task model: ", error.message);
   });
 
 module.exports = Task;
