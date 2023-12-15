@@ -36,13 +36,4 @@ const User = sequelize.define(
   }
 );
 
-sequelize
-  .sync({ force: true })
-  .then(() => {
-    console.log("User model synced successfully!");
-  })
-  .catch((error) => {
-    console.error("Unable to sync User model: ", error.message);
-  });
-
 module.exports = User;

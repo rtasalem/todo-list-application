@@ -28,13 +28,4 @@ const MediaBlob = sequelize.define(
   }
 );
 
-sequelize
-  .sync({ force: true })
-  .then(() => {
-    console.log("MediaBlob model synced successfully!");
-  })
-  .catch((error) => {
-    console.error("Unable to sync MediaBlob model: ", error.message);
-  });
-
 module.exports = MediaBlob;

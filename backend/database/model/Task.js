@@ -26,13 +26,4 @@ const Task = sequelize.define(
   }
 );
 
-sequelize
-  .sync({ force: true })
-  .then(() => {
-    console.log("Task model synced successfully!");
-  })
-  .catch((error) => {
-    console.error("Unable to sync Task model: ", error.message);
-  });
-
 module.exports = Task;
