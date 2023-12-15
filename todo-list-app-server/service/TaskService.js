@@ -16,7 +16,7 @@ const TaskService = {
         try {
             const task = await Task.findByPk(id);
             if (!task) {
-                throw new Error('Task not found.');
+                throw new Error(`Task with id of ${id} not found.`);
             }
             return task;
         } catch (err) {
@@ -25,18 +25,10 @@ const TaskService = {
     },
 
     // Create task:
-    async createTask({ name, description, endDate, completed, listOfTasksId, mainListId, mediaBlobId, taskPriorityId }) {
+    async createTask(taskData) {
         try {
-            const newTask = await Task.create({
-                name,
-                description,
-                endDate,
-                completed,
-                listOfTasksId,
-                mainListId,
-                mediaBlobId,
-                taskPriorityId
-            });
+            const newTask = await Task.create({ taskData });
+            await newTask.save();
             return newTask;
         } catch (err) {
             console.error(err.message);
@@ -48,9 +40,10 @@ const TaskService = {
         try {
             const task = await Task.findByPk(id);
             if (!task) {
-                throw new Error("Task not found.");
+                throw new Error(`Task with id of ${id} not found.`);
             }
             await task.update(updatedTaskData);
+            // await task.save();
             return task;
         } catch (err) {
             console.error(err.message);
@@ -62,10 +55,10 @@ const TaskService = {
         try {
             const task = await Task.findByPk(id);
             if (!task) {
-                throw new Error("Task not found.");
+                throw new Error(`Task with id of ${id} not found.`);
             }
             await task.destroy();
-            return { message: "Task successfully deleted." }
+            return { message: `Task with id of ${id} successfully deleted.` }
         } catch (err) {
             console.error(err.message);
         }

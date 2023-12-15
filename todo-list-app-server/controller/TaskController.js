@@ -18,7 +18,7 @@ router.get('/:id', async (req, res) => {
     try {
         const task = await TaskService.getTaskById(id);
         if (!task) {
-            res.status(404).json({ message: "Task not found." });
+            res.status(404).json({ message: `Task with id of ${id} not found.` });
         }
         res.status(200).json(task);
     } catch (err) {
@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
         const newTask = await TaskService.createTask(taskData);
         res.status(201).json(newTask);
     } catch (err) {
-        res.status(400).json({ error: err.message });
+        res.status(400).json({ message: "Error creating task." });
     }
 });
 
@@ -43,9 +43,12 @@ router.put('/:id', async (req, res) => {
     const updatedTaskData = req.body;
     try {
         const updatedTaskResult = await TaskService.updateTask(id, updatedTaskData);
-        res.json(updatedTaskResult);
+        if (!updatedTaskData) {
+            res.status(404).json({ message: `Task with id of ${id} not found.` });
+        }
+        res.status(200).json(updatedTaskResult);
     } catch (err) {
-        res.status(400).json({ error: err.message });
+        res.status(400).json({ message: "Error updating task." });
     }
 });
 
@@ -55,9 +58,9 @@ router.delete('/:id', async (req, res) => {
     try {
         const deletedTask = await TaskService.deleteTaskById(id);
         if (!deletedTask) {
-            return res.status(404).json({ message: "Task not found." });
+            return res.status(404).json({ message: `Task with id of ${id} not found.` });
         }
-        res.status(200).json({ message: "Task deleted successfully." });
+        res.status(200).json({ message: `Task with id of ${id} deleted successfully.` });
     } catch (err) {
         res.status(500).json({ message: "Error deleting task." });
     }
