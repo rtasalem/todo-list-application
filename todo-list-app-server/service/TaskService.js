@@ -25,10 +25,10 @@ const TaskService = {
     },
 
     // Create task:
-    async createTask({ taskData }) {
+    async createTask(taskData) {
         try {
-            const newTask = await Task.create({ taskData });
-            await newTask.save();
+            console.log("Received task data: ", taskData);
+            const newTask = await Task.create(taskData);
             return newTask;
         } catch (err) {
             console.error(err.message);

@@ -31,9 +31,11 @@ router.post('/', async (req, res) => {
     const taskData = req.body;
     try {
         const newTask = await TaskService.createTask(taskData);
-        res.status(201).json(newTask);
+        if (newTask) {
+            res.status(201).json(newTask);
+        }
     } catch (err) {
-        res.status(400).json({ message: "Error creating task." });
+        res.status(500).json({ message: "Error creating task." });
     }
 });
 
