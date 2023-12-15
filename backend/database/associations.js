@@ -1,3 +1,4 @@
+const sequelize = require("./sequelize");
 const User = require("./model/User");
 const Task = require("./model/Task");
 //const Collection = require("./model/Collection");
@@ -14,6 +15,15 @@ Task.belongsTo(User);
 //Priority.belongsTo(Task);
 //Task.hasMany(MediaBlob);
 //MediaBlob.belongsTo(Task);
+
+sequelize
+  .sync({ force: true })
+  .then(() => {
+    console.log("Models synced successfully!");
+  })
+  .catch((error) => {
+    console.error("Unable to sync models: ", error.message);
+  });
 
 module.exports = {
   User,

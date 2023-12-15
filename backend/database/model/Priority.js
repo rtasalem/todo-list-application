@@ -24,13 +24,4 @@ const Priority = sequelize.define(
   }
 );
 
-sequelize
-  .sync({ force: true })
-  .then(() => {
-    console.log("Priority model synced successfully!");
-  })
-  .catch((error) => {
-    console.error("Unable to sync Priority model: ", error.message);
-  });
-
 module.exports = Priority;

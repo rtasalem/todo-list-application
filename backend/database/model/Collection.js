@@ -20,13 +20,4 @@ const Collection = sequelize.define(
   }
 );
 
-sequelize
-  .sync({ force: true })
-  .then(() => {
-    console.log("Collection model synced successfully!");
-  })
-  .catch((error) => {
-    console.error("Unable to sync Collection model: ", error.message);
-  });
-
 module.exports = Collection;
