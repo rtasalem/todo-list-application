@@ -45,7 +45,7 @@ router.put('/:id', async (req, res) => {
     const updatedTaskData = req.body;
     try {
         const updatedTaskResult = await TaskService.updateTask(id, updatedTaskData);
-        if (updatedTaskData) {
+        if (updatedTaskResult) {
             res.status(200).json(updatedTaskResult);
         }
         res.status(404).json({ message: `Task with id of ${id} not found.` })
