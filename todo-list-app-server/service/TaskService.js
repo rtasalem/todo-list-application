@@ -25,7 +25,7 @@ const TaskService = {
     },
 
     // Create task:
-    async createTask(taskData) {
+    async createTask({ taskData }) {
         try {
             const newTask = await Task.create({ taskData });
             await newTask.save();
@@ -42,9 +42,8 @@ const TaskService = {
             if (!task) {
                 throw new Error(`Task with id of ${id} not found.`);
             }
-            await task.update(updatedTaskData);
-            // await task.save();
-            return task;
+            const updatedTask = await task.update(updatedTaskData);
+            return updatedTask;
         } catch (err) {
             console.error(err.message);
         }
