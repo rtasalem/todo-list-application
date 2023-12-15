@@ -18,7 +18,7 @@ const TaskPriority = sequelize.define(
 sequelize
     .sync()
     .then(() => {
-        console.log("**************Task Priority model synced successfully!");
+        console.log("Task Priority model synced successfully!");
     })
     .catch((error) => {
         console.error("Unable to sync Task Priority model: ", error);
