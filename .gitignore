@@ -212,6 +212,8 @@ dist
 **/*.back.*
 
 node_modules
+backend/node_modules
+frontend/node_modules
 
 *.sublime*
 
@@ -263,6 +265,3 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-
-# End of https://www.toptal.com/developers/gitignore/api/windows,macos,linux,git,visualstudiocode,node,react
-0:00
