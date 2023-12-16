@@ -1,9 +1,12 @@
 const express = require("express");
+const cors = require("cors");
 // const session = require("express-session");
 const taskRouter = require("./controller/TaskController.js");
 const userRouter = require("./controller/UserController.js");
 
 const app = express();
+
+app.use(cors())
 
 const PORT = 3000;
 

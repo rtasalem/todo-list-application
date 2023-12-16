@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import AddTodoIconBar from "./AddTodoIconBar";
 
@@ -15,8 +15,6 @@ const AddTodo = () => {
 
             if (response.status === 200) {
                 console.log('Task added successfully!');
-                // TODO: show the newly added task
-
                 setTaskName("");
             } else {
                 console.error('Failed to add task.');

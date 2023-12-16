@@ -1,7 +1,7 @@
 import ListHeader from "./components/ListHeader";
 import AddTodo from "./components/AddTodo";
 import Search from "./components/Search";
-import YourTodoLists from "./components/YourTodoLists";
+import TodoList from "./components/TodoList";
 
 const App = () => {
   return (
@@ -12,7 +12,7 @@ const App = () => {
       <main>
         <AddTodo />
         <Search />
-        <YourTodoLists />
+        <TodoList />
       </main>
     </div>
   );
