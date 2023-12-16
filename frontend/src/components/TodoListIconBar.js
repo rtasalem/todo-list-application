@@ -3,11 +3,14 @@ import { BsImage, BsPlayCircle, BsCheckSquare, BsPencilSquare } from 'react-icon
 import TrashIcon from './TrashIcon';
 
 const TodoListIconBar = ({ deleteItem }) => {
-  const iconArray = [BsImage, BsPlayCircle, BsCheckSquare, BsPencilSquare, TrashIcon];
+    const iconArray = [BsImage, BsPlayCircle, BsCheckSquare, BsPencilSquare];
 
-  return (
-      <IconBar icons={iconArray} deleteItem={deleteItem} />
-  );
+    return (
+        <div className="icon-bar-container">
+            <IconBar icons={iconArray} />
+            <TrashIcon deleteItem={deleteItem} />
+        </div>
+    );
 };
 
 export default TodoListIconBar;
