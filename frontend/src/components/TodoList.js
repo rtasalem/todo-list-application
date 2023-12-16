@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import TodoListIconBar from './TodoListIconBar';
+import ListItem from './ListItem';
 
 const TodoList = () => {
   const [tasks, setTasks] = useState([]);
@@ -23,19 +23,18 @@ const TodoList = () => {
     fetchTasks();
   }, []);
 
+  const handleDeleteSuccess = (deletedTaskId) => {
+    // Update the state or perform any other action based on the deleted task ID
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== deletedTaskId));
+  };
+
   return (
     <div className="your-todo-list-container">
       <h2>Your To-Do Lists</h2>
 
+      {/* Render tasks using ListItem */}
       {tasks.map((task) => (
-        <div key={task.id} className="form-container">
-          <form>
-            <input type="text" placeholder={`Todo ${task.id}`} value={task.name} readOnly />
-          </form>
-          <div className="icon-bar-container">
-            <TodoListIconBar />
-          </div>
-        </div>
+        <ListItem key={task.id} task={task} onDeleteSuccess={handleDeleteSuccess} />
       ))}
     </div>
   );
