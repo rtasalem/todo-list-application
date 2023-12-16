@@ -29,7 +29,7 @@ const MainListService = {
     // Create list
     async createList(listData) {
         try {
-        const newList = await List.create(listData);
+        const newList = await MainList.create(listData);
         return newList;
         } catch (err) {
         console.error("Error creating list:", err.message);
@@ -37,10 +37,25 @@ const MainListService = {
         }
     },
 
+    // Update list
+    async updateList(id, updatedListData) {
+        try {
+        const list = await MainList.findByPk(id);
+        if (!list) {
+            throw new Error("List not found.");
+        }
+        await list.update(updatedListData);
+        return list;
+        } catch (err) {
+        console.error("Error updating list:", err.message);
+        throw err;
+        }
+    },
+
     // Patch list
     async patchList(id, patchedListData) {
         try {
-          const list = await List.findByPk(id);
+          const list = await MainList.findByPk(id);
           if (!list) {
             throw new Error("List not found.");
           }
@@ -57,7 +72,7 @@ const MainListService = {
     // Delete list
     async deleteListById(id) {
         try {
-        const list = await List.findByPk(id);
+        const list = await MainList.findByPk(id);
         if (!list) {
             throw new Error("List not found.");
         }
@@ -71,4 +86,4 @@ const MainListService = {
 
 };
 
-module.export = MainListService;
+module.exports = MainListService;
