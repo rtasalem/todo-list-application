@@ -1,8 +1,9 @@
-FROM node:14
+FROM node:latest
 
 WORKDIR /usr/app
 
 COPY backend/package.json ./
+
 COPY backend/package-lock.json ./
 
 RUN npm install --production=false
