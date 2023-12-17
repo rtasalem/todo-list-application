@@ -1,7 +1,6 @@
 const { Task } = require("../database/associations.js");
 
 const TaskService = {
-  // Get all tasks
   async getAllTasks() {
     try {
       const tasks = await Task.findAll();
@@ -43,9 +42,10 @@ const TaskService = {
       const task = await Task.findByPk(id);
       if (!task) {
         throw new Error("Task not found.");
+      } else {
+        await task.update(updatedTaskData);
+        return task;
       }
-      await task.update(updatedTaskData);
-      return task;
     } catch (err) {
       console.error("Error updating task:", err.message);
       throw err;
@@ -58,12 +58,10 @@ const TaskService = {
       const task = await Task.findByPk(id);
       if (!task) {
         throw new Error("Task not found.");
+      } else {
+        await task.update(patchedTaskData);
+        return task;
       }
-
-      // Update only the specified fields
-      await task.update(patchedTaskData);
-
-      return task;
     } catch (err) {
       console.error("Error patching task:", err.message);
       throw err;
@@ -75,7 +73,7 @@ const TaskService = {
     try {
       const task = await Task.findByPk(id);
       if (!task) {
-        throw new Error("Task not found.");
+        return null;
       }
       await task.destroy();
       return { message: "Task successfully deleted." };
