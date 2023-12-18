@@ -41,9 +41,10 @@ const UserService = {
       const user = await User.findByPk(userId);
       if (!user) {
         throw new Error("User not found.");
+      } else {
+        await user.update(updatedTaskData);
+        return user;
       }
-      await user.update(updatedTaskData);
-      return user;
     } catch (err) {
       console.error("Error updating user:", err.message);
       throw err;
@@ -55,11 +56,10 @@ const UserService = {
       const user = await User.findByPk(userId);
       if (!user) {
         throw new Error("User not found.");
+      } else {
+        await user.update(patchedUserData);
+        return user;
       }
-
-      await user.update(patchedUserData);
-
-      return user;
     } catch (err) {
       console.error("Error patching user:", err.message);
       throw err;
@@ -70,7 +70,7 @@ const UserService = {
     try {
       const user = await User.findByPk(userId);
       if (!user) {
-        throw new Error("User not found.");
+        return null;
       }
       await user.destroy();
       return { message: "User successfully deleted." };
