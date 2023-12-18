@@ -10,15 +10,19 @@ const MediaBlob = sequelize.define(
       autoIncrement: true,
     },
     name: {
-      type: DataTypes.STRING(50),
+      type: DataTypes.STRING(200),
       allowNull: false,
     },
-    base64: {
-      type: DataTypes.TEXT,
+    caption: {
+      type: DataTypes.STRING(200),
       allowNull: false,
+    },
+    mediaUrl: {
+      type: DataTypes.STRING(500),
+      allowNull: true,
     },
     type: {
-      type: DataTypes.STRING(5),
+      type: DataTypes.STRING(15),
       allowNull: false,
     },
   },
