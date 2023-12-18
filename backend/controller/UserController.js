@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const UserService = require("../service/UserService");
+// const checkLoggedIn = require("../middleware/authenticate");
 
 // GET all users:
 router.get("/", async (req, res) => {
@@ -73,7 +74,7 @@ router.delete("/:id", async (req, res) => {
       res.status(200).json({ message: "User deleted successfully." });
     }
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: "Error deleting user." });
   }
 });
 
