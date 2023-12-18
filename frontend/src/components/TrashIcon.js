@@ -2,7 +2,6 @@ import { BsTrash3 } from 'react-icons/bs';
 
 const TrashIcon = ({ deleteItem }) => {
     const handleClick = () => {
-        // Trigger delete action
         deleteItem();
     };
 
