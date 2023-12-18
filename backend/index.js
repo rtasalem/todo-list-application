@@ -5,8 +5,11 @@ const taskRouter = require("./controller/TaskController.js");
 const collectionRouter = require("./controller/CollectionController.js");
 const priorityRouter = require("./controller/PriorityController.js");
 const mediaBlobRouter = require("./controller/MediaBlobController.js");
+const cors = require("cors");
 
 const app = express();
+
+app.use(cors());
 
 const PORT = 3000;
 
