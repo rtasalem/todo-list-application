@@ -4,30 +4,9 @@ import TodoListIconBar from './TodoListIconBar';
 import axios from "axios";
 import Modal from './Modal';
 
-const ListItem = ({ task, onDeleteSuccess, editItem }) => {
+const ListItem = ({ task, onDeleteSuccess }) => {
 
     const [showModal, setShowModal] = useState(false);
-
-    // const handleEditItem = async () => {
-    //     try {
-    //         const response = await axios.put(`http://localhost:3000/api/v1/tasks/${task.id}`, {
-    //             name: task.name,
-    //             description: task.description,
-    //             endDate: task.endDate,
-    //             completed: task.completed
-    //         });
-
-    //         if (response.status === 200) {
-    //             console.log("Task updated successfully.");
-    //             setShowModal(true);
-    //         } else {
-    //             console.error("Failed to update task.");
-    //         }
-    //     }
-    //     catch (err) {
-    //         console.error(err);
-    //     }
-    // };
 
     const deleteItem = async () => {
         try {
@@ -48,9 +27,7 @@ const ListItem = ({ task, onDeleteSuccess, editItem }) => {
                 <p className="task-name">{task.name}</p>
             </div>
 
-            <button className="edit" onClick={() => setShowModal(true)}>EDIT</button>
-
-            <TodoListIconBar deleteItem={deleteItem} />
+            <TodoListIconBar editItem={() => setShowModal(true)} deleteItem={deleteItem} />
             {showModal && <Modal mode={'edit'} setShowModal={setShowModal} task={task} />}
         </li>
     );

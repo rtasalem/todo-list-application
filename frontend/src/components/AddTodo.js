@@ -13,14 +13,24 @@ const AddTodo = () => {
                 name: taskName,
             });
 
-            if (response.status === 200) {
-                console.log('Task added successfully!');
+            if (response.status === 201) {
                 setTaskName("");
+                window.location.reload();
             } else {
-                console.error('Failed to add task.');
+                console.error(`Failed to add task. Unexpected status code: ${response.status}`);
             }
         } catch (error) {
             console.error('An error occurred:', error);
+
+            if (error.response) {
+                console.error('Response data:', error.response.data);
+                console.error('Response status:', error.response.status);
+                console.error('Response headers:', error.response.headers);
+            } else if (error.request) {
+                console.error('No response received. Request details:', error.request);
+            } else {
+                console.error('Error details:', error.message);
+            }
         }
     };
 
