@@ -82,6 +82,9 @@ router.get("/:id", async (req, res) => {
 //POST create Media:
 router.post("/", upload.single("media"), async (req, res) => {
   const { name, caption } = req.body;
+  if (!req.file) {
+    return res.status(400).send("No file uploaded.");
+  }
   const mimeType = req.file.mimetype;
 
   const fileKey = randomFileName();
