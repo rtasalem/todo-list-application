@@ -4,7 +4,6 @@ import ListHeader from "./components/ListHeader";
 import AddTodo from "./components/AddTodo";
 import Search from "./components/Search";
 import TodoList from "./components/TodoList";
-
 import Calendar from "./components/pages/Calendar"
 
 const App = () => {
