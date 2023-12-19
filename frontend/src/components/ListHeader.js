@@ -1,10 +1,14 @@
 import { useState } from 'react';
-import { BsFillGearFill } from 'react-icons/bs';
+import { BsCalendar, BsFillGearFill, BsHouse } from 'react-icons/bs';
 import Icon from './Icon';
 import Modal from './Modal';
 
 const ListHeader = () => {
-    const [showModal, setShowModal] = useState(false)
+    const [showModal, setShowModal] = useState(false);
+
+    const { navigateToCalendar , navigateToHome } = () => {
+        window.location.href = '/calendar';
+      };
 
     return (
         <div className="list-header">
@@ -12,6 +16,15 @@ const ListHeader = () => {
             <div className="button-container">
                 <button className="create" onClick={() => setShowModal(true)}>ADD NEW</button>
                 <Icon icon={BsFillGearFill} className="icon" />
+
+                <a href="/calendar" onClick={navigateToCalendar}>
+                    <Icon icon={BsCalendar} className="icon" />
+                </a>
+
+                <a href="/" onClick={navigateToHome}>
+                    <Icon icon={BsHouse} className="icon" />
+                </a>
+
             </div>
             {showModal && <Modal mode={'create'} setShowModal={setShowModal} />}
         </div>
