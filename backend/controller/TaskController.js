@@ -18,7 +18,7 @@ router.get("/:id", async (req, res) => {
   try {
     const task = await TaskService.getTaskById(id);
     if (!task) {
-      res.status(404).json({ message: "Task not found." });
+      res.status(404).json({ message: `Task with id of ${id} not found.` });
     } else {
       res.status(200).json(task);
     }
@@ -68,7 +68,7 @@ router.delete("/:id", async (req, res) => {
   try {
     const deletedTask = await TaskService.deleteTaskById(id);
     if (!deletedTask) {
-      res.status(404).json({ message: "Task not found." });
+      res.status(404).json({ message: `Task with id of ${id} not found.` });
     } else {
       res.status(200).json({ message: "Task deleted successfully." });
     }
