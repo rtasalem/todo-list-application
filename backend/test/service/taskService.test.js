@@ -66,19 +66,53 @@ describe("TaskService", () => {
   // Test: PUT update task
   it("should update a task", async () => {
     const id = 1;
-    const mockTaskData = {
-      name: "Mock Updated Task",
-      description: "Description for Mock Updated Task",
-      endDate: "2068-07-22",
-      completed: true,
+    const mockUpdatedTaskData = {
+      name: "Mock Task",
+      description: "Description for Mock Task",
+      endDate: "2045-07-27",
+      completed: false,
     };
-    const mockTask = { id: id, ...mockTaskData };
+    const mockTask = { id: id, ...mockUpdatedTaskData };
     Task.findByPk.mockResolvedValue(mockTask);
-    Task.update.mockResolvedValue(mockTask);
+    mockTask.update.mockResolvedValue(mockTask);
 
-    const mockUpdatedTask = await TaskService.updateTask(id, mockTaskData);
+    const mockUpdatedTask = await TaskService.updateTask(
+      id,
+      mockUpdatedTaskData
+    );
     expect(mockUpdatedTask).toEqual(mockTask);
   });
 
-  it("");
+  // Test: PATCH task
+  it("should patch a task", async () => {
+    const id = 1;
+    const mockPatchedTaskData = {
+      description: "Description for Mock Patched Task",
+    };
+    const mockTask = { id: id, ...mockPatchedTaskData };
+    Task.findByPk.mockResolvedValue(mockTask);
+
+    const mockPatchedTask = await TaskService.patchTask(
+      id,
+      mockPatchedTaskData
+    );
+    expect(mockPatchedTask).toEqual(mockTask);
+  });
+
+  // Test: DELETE task by id
+  it("should delete a task by id", async () => {
+    const id = 1;
+    const mockTask = {
+      id: id,
+      name: "Mock Task",
+      description: "Description for Mock Task",
+      endDate: "2056-01-02",
+      completed: true,
+    };
+    Task.findByPk.mockResolvedValue(mockTask);
+    mockTask.destroy.mockResolvedValue(true);
+
+    const result = await TaskService.deleteTaskById(id);
+    expect(result).toEqual({ message: "Task successfully deleted." });
+  });
 });
