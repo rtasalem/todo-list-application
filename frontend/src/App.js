@@ -6,7 +6,7 @@ import Auth from "./components/Auth";
 
 const App = () => {
 
-  const authToken = false;
+  const authToken = true;
 
   return (
     <div className="app">

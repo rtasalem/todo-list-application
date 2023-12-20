@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import axios from 'axios';
 import AddTodoIconBar from "./AddTodoIconBar";
+import Modal from './Modal';
 
 const AddTodo = () => {
     const [taskName, setTaskName] = useState("");
+    const [showModal, setShowModal] = useState(false);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -52,7 +55,10 @@ const AddTodo = () => {
                     />
                 </form>
                 <div className="icon-bar-container">
-                    <AddTodoIconBar />
+                    {/* <AddTodoIconBar addItem={addItem}  /> */}
+                    <AddTodoIconBar addItem={() => setShowModal(true)}  />
+            {showModal && <Modal mode={'create'} setShowModal={setShowModal} />}
+        
                 </div>
             </div>
         </div>

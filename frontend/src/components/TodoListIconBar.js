@@ -5,7 +5,12 @@ import EditIcon from "./EditIcon";
 import FlagIcon from "./Priority";
 
 const TodoListIconBar = ({ editItem, deleteItem }) => {
-  const iconArray = [FlagIcon, BsImage, BsPlayCircle, BsCheckSquare];
+  const iconArray = [
+    FlagIcon, 
+    BsImage, 
+    BsPlayCircle, 
+    BsCheckSquare
+  ];
 
   return (
     <div className="icon-bar-container">
