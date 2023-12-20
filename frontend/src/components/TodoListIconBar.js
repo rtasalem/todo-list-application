@@ -10,8 +10,8 @@ const TodoListIconBar = ({ editItem, deleteItem }) => {
   return (
     <div className="icon-bar-container">
       <IconBar icons={iconArray} />
-      <EditIcon editItem={editItem} />
-      <TrashIcon deleteItem={deleteItem} />
+      <EditIcon editItem={editItem} className="icon" />
+      <TrashIcon deleteItem={deleteItem} className="icon" />
     </div>
   );
 };

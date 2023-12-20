@@ -48,6 +48,7 @@ const AddTodo = () => {
                         placeholder="What do you need to-do?"
                         value={taskName}
                         onChange={handleInputChange} 
+                        autoFocus
                     />
                 </form>
                 <div className="icon-bar-container">
