@@ -10,7 +10,7 @@ const AddTodo = () => {
 
         try {
             const response = await axios.post('http://localhost:3000/api/v1/tasks', {
-                name: taskName,
+                name: taskName
             });
 
             if (response.status === 201) {
