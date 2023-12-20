@@ -14,6 +14,7 @@ describe("TaskController", () => {
     jest.clearAllMocks();
   });
 
+  // TEST - GET all tasks:
   it("should get all tasks", async () => {
     const mockTasks = [
       {
@@ -38,6 +39,7 @@ describe("TaskController", () => {
     expect(response.body).toEqual(mockTasks);
   });
 
+  // TEST - GET task by id:
   it("should get a task by id", async () => {
     const id = 1;
     const mockTask = {
@@ -54,74 +56,104 @@ describe("TaskController", () => {
     expect(response.body).toEqual(mockTask);
   });
 
-  it("should create a new task", async () => {
-    const newTaskData = {
-      title: "New Task",
-      description: "A newly created task",
-    };
-    TaskService.createTask.mockResolvedValue(newTaskData);
+  // TEST - GET task by id - Error Handling:
+  it("should return 404 if task not found", async () => {
+    TaskService.getTaskById.mockResolvedValue(null);
 
-    const response = await request(app).post("/api/v1/tasks").send(newTaskData);
+    const response = await request(app).get("/api/v1/tasks/1000");
+
+    expect(response.status).toBe(404);
+    expect(response.body).toEqual({
+      message: `Task with id of 1000 not found.`,
+    });
+  });
+
+  // TEST - POST create task:
+  it("should create a new task", async () => {
+    const newMockTaskData = {
+      name: "New Mock Task",
+      description: "Description for New Mock Task",
+      endDate: "2001-01-27",
+      completed: true,
+    };
+    TaskService.createTask.mockResolvedValue(newMockTaskData);
+
+    const response = await request(app)
+      .post("/api/v1/tasks")
+      .send(newMockTaskData);
 
     expect(response.status).toBe(201);
-    expect(response.body).toEqual(newTaskData);
+    expect(response.body).toEqual(newMockTaskData);
   });
 
+  // TEST - PUT update task:
   it("should update a task by id", async () => {
-    const taskId = 1;
-    const updatedTaskData = {
-      title: "Updated Task",
-      description: "An updated task",
+    const id = 1;
+    const mockUpdatedTaskData = {
+      name: "Mock Updated Task",
+      description: "Description for Mock Updated Task",
+      endDate: "1934-07-03",
+      completed: false,
     };
-    TaskService.updateTask.mockResolvedValue(updatedTaskData);
+    TaskService.updateTask.mockResolvedValue(mockUpdatedTaskData);
 
     const response = await request(app)
-      .put(`/api/v1/tasks/${taskId}`)
-      .send(updatedTaskData);
+      .put(`/api/v1/tasks/${id}`)
+      .send(mockUpdatedTaskData);
 
     expect(response.status).toBe(200);
-    expect(response.body).toEqual(updatedTaskData);
+    expect(response.body).toEqual(mockUpdatedTaskData);
   });
 
+  // TEST - PATCH task by id:
   it("should patch a task by id", async () => {
-    const taskId = 1;
-    const patchedTaskData = { description: "Patched task description" };
-    TaskService.patchTask.mockResolvedValue(patchedTaskData);
+    const id = 1;
+    const mockPatchedTaskData = {
+      description: "Description for Mock Patched Task",
+    };
+    TaskService.patchTask.mockResolvedValue(mockPatchedTaskData);
 
     const response = await request(app)
-      .patch(`/api/v1/tasks/${taskId}`)
-      .send(patchedTaskData);
+      .patch(`/api/v1/tasks/${id}`)
+      .send(mockPatchedTaskData);
 
     expect(response.status).toBe(200);
-    expect(response.body).toEqual(patchedTaskData);
+    expect(response.body).toEqual(mockPatchedTaskData);
   });
 
+  // TEST - DELETE task by id:
   it("should delete a task by id", async () => {
-    const taskId = 1;
-    const deleteMessage = { message: "Task successfully deleted." };
-    TaskService.deleteTaskById.mockResolvedValue(deleteMessage);
+    const id = 1;
+    const mockDeleteMessage = { message: "Task deleted successfully." };
+    TaskService.deleteTaskById.mockResolvedValue(mockDeleteMessage);
 
-    const response = await request(app).delete(`/api/v1/tasks/${taskId}`);
+    const response = await request(app).delete(`/api/v1/tasks/${id}`);
 
     expect(response.status).toBe(200);
-    expect(response.body).toEqual(deleteMessage);
+    expect(response.body).toEqual(mockDeleteMessage);
   });
 
+  // TEST - DELETE task by id - Error Handling:
   it("should return 404 if task not found (GET by id)", async () => {
     TaskService.getTaskById.mockResolvedValue(null);
 
-    const response = await request(app).get("/api/v1/tasks/999");
+    const response = await request(app).get("/api/v1/tasks/1000");
 
     expect(response.status).toBe(404);
-    expect(response.body).toEqual({ message: "Task not found." });
+    expect(response.body).toEqual({
+      message: `Task with id of 1000 not found.`,
+    });
   });
 
+  // TEST - DELETE task by id - Error Handling:
   it("should return 404 if task not found (DELETE by id)", async () => {
     TaskService.deleteTaskById.mockResolvedValue(null);
 
-    const response = await request(app).delete("/api/v1/tasks/999");
+    const response = await request(app).delete("/api/v1/tasks/1000");
 
     expect(response.status).toBe(404);
-    expect(response.body).toEqual({ message: "Task not found." });
+    expect(response.body).toEqual({
+      message: `Task with id of 1000 not found.`,
+    });
   });
 });
