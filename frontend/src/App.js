@@ -1,4 +1,4 @@
-import ListHeader from "./components/ListHeader";
+import Header from "./components/Header";
 import AddTodo from "./components/AddTodo";
 import Search from "./components/Search";
 import TodoList from "./components/TodoList";
@@ -14,7 +14,7 @@ const App = () => {
       {authToken &&
       <>
       <header>
-        <ListHeader />
+        <Header />
       </header>
       <main>
         <AddTodo />

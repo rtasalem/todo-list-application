@@ -1,7 +1,7 @@
-import IconBar from "./IconBar";
+import IconBar from "./icons/IconBar";
 import { BsImage, BsPlayCircle, BsCheckSquare } from "react-icons/bs";
-import TrashIcon from "./TrashIcon";
-import EditIcon from "./EditIcon";
+import TrashIcon from "./icons/TrashIcon";
+import EditIcon from "./icons/EditIcon";
 import FlagIcon from "./Priority";
 
 const TodoListIconBar = ({ editItem, deleteItem }) => {

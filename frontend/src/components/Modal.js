@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import { editTask, addTask } from "../services/api";
 
 const Modal = ({ mode, setShowModal, task }) => {
   const editMode = mode === 'edit';
@@ -13,18 +13,18 @@ const Modal = ({ mode, setShowModal, task }) => {
 
   const updateData = async () => {
     try {
-      const response = await axios.put(`http://localhost:3000/api/v1/tasks/${task.id}`, {
-        name: data.name,
-        description: data.description,
-        endDate: data.endDate,
-        completed: data.completed
-      });
-
-      if (response.status === 200) {
-        console.log("Task updated successfully.");
-        setShowModal(false);
+      if (editMode) {
+        const success = await editTask(task.id, data);
+  
+        if (success) {
+          setShowModal(false);
+        }
       } else {
-        console.error("Failed to update task.");
+        const success = await addTask(data.name);
+  
+        if (success) {
+          setShowModal(false);
+        }
       }
     } catch (err) {
       console.error(err);
@@ -44,7 +44,7 @@ const Modal = ({ mode, setShowModal, task }) => {
     <div className="overlay">
       <div className="modal">
         <div className="form-title-container">
-          <h3>{mode} To-Do</h3>
+          <h3>{mode === 'edit' ? 'Edit' : 'Add'} To-Do</h3>
           <button onClick={() => setShowModal(false)}>X</button>
         </div>
 
@@ -84,7 +84,7 @@ const Modal = ({ mode, setShowModal, task }) => {
           <input
             className={mode}
             type="submit"
-            onClick={editMode ? updateData : setData}
+            onClick={updateData}
           />
         </form>
       </div>

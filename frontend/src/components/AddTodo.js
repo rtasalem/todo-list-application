@@ -1,41 +1,22 @@
 import { useState } from 'react';
-import axios from 'axios';
 import AddTodoIconBar from "./AddTodoIconBar";
 import Modal from './Modal';
+import { addTask } from "../services/api";
 
 const AddTodo = () => {
     const [taskName, setTaskName] = useState("");
     const [showModal, setShowModal] = useState(false);
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-            const response = await axios.post('http://localhost:3000/api/v1/tasks', {
-                name: taskName
-            });
+        const success = await addTask(taskName);
 
-            if (response.status === 201) {
-                setTaskName("");
-                window.location.reload();
-            } else {
-                console.error(`Failed to add task. Unexpected status code: ${response.status}`);
-            }
-        } catch (error) {
-            console.error('An error occurred:', error);
-
-            if (error.response) {
-                console.error('Response data:', error.response.data);
-                console.error('Response status:', error.response.status);
-                console.error('Response headers:', error.response.headers);
-            } else if (error.request) {
-                console.error('No response received. Request details:', error.request);
-            } else {
-                console.error('Error details:', error.message);
-            }
+        if (success) {
+            setTaskName("");
+            window.location.reload();
         }
-    };
+    }
 
     const handleInputChange = (e) => {
         setTaskName(e.target.value);
@@ -46,19 +27,17 @@ const AddTodo = () => {
             <h2>Add a To-Do...</h2>
             <div className="form-container">
                 <form onSubmit={handleSubmit} id="add-todo-form">
-                    <input 
-                        type="text" 
+                    <input
+                        type="text"
                         placeholder="What do you need to-do?"
                         value={taskName}
-                        onChange={handleInputChange} 
+                        onChange={handleInputChange}
                         autoFocus
                     />
                 </form>
                 <div className="icon-bar-container">
-                    {/* <AddTodoIconBar addItem={addItem}  /> */}
-                    <AddTodoIconBar addItem={() => setShowModal(true)}  />
-            {showModal && <Modal mode={'create'} setShowModal={setShowModal} />}
-        
+                    <AddTodoIconBar addItem={() => setShowModal(true)} />
+                    {showModal && <Modal mode={'create'} setShowModal={setShowModal} />}
                 </div>
             </div>
         </div>

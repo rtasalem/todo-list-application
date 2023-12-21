@@ -1,23 +1,14 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import ListItem from './ListItem';
+import { getTasks } from '../services/api';
 
 const TodoList = () => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     const fetchTasks = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/api/v1/tasks');
-
-        if (response.status === 200) {
-          setTasks(response.data);
-        } else {
-          console.error('Failed to fetch tasks.');
-        }
-      } catch (error) {
-        console.error('An error occurred:', error);
-      }
+      const tasksData = await getTasks();
+      setTasks(tasksData);
     };
 
     fetchTasks();

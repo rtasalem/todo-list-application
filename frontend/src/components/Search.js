@@ -1,4 +1,4 @@
-import Icon from "./Icon"
+import Icon from "./icons/Icon"
 import { BsSearch } from "react-icons/bs";
 import { BsFilterSquare } from "react-icons/bs";
 
