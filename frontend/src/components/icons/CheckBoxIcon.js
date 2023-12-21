@@ -1,16 +1,16 @@
 import { BsCheckSquare } from 'react-icons/bs';
 
-const CheckBoxIcon = ({ checkItem, completed }) => {
+const CheckBoxIcon = ({ checkItem, completed, hoverClassName }) => {
     const handleClick = () => {
         checkItem();
     };
 
     return (
         <div
-            className={`icon ${completed ? 'completed' : ''}`}
+            className={`icon ${completed ? 'completed' : ''} ${hoverClassName}`}
             onClick={handleClick}
         >
-            <BsCheckSquare style={{ color: completed ? 'green' : 'inherit' }} />
+            <BsCheckSquare className="checkbox-icon" style={{ color: completed ? 'green' : 'inherit' }} />
         </div>
     );
 };

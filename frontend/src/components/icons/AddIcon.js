@@ -7,7 +7,7 @@ const AddIcon = ({ addItem }) => {
 
     return (
         <div className="icon" onClick={handleClick}>
-            <BsPlusCircle />
+            <BsPlusCircle className="add-icon"/>
         </div>
     );
 }

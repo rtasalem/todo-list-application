@@ -129,11 +129,23 @@ button:focus {
     font-size: 25px;
     cursor: pointer;
     margin: 0 10px;
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .icon:hover {
     transform: scale(1.1);
+}
+
+.icon.green:hover {
+    color: inherit;
+}
+
+.icon:hover .add-icon {
+    color: green;
+}
+
+.icon:hover .trash-icon {
+    color: red;
 }
 
 /* Completed state */

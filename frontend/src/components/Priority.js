@@ -46,7 +46,7 @@ const FlagIcon = () => {
   }, [selectedColor, flagName]);
 
   return (
-    <div className="flag-icon-container">
+    <div className="icon flag-icon-container">
       <BsFlag onClick={() => setShowDropdown(!showDropdown)} />
       {showDropdown && (
         <div className="flag-dropdown">
