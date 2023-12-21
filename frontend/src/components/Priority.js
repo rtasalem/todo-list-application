@@ -27,11 +27,6 @@ const FlagIcon = ({ taskId, initialColor, initialName, initialFlagId }) => {
 
   const handleSaveFlag = async () => {
     try {
-      console.log(
-        "--------------------------------------- INITIAL ID",
-        initialFlagId
-      );
-      console.log("--------------------------------------- TASK ID", taskId);
       if (taskId && initialFlagId) {
         // Flag already has an id, so it exists in the database and needs to be updated
         const response = await axios.put(
@@ -70,11 +65,6 @@ const FlagIcon = ({ taskId, initialColor, initialName, initialFlagId }) => {
         });
 
         console.log("Flag created:", response.data);
-        //initialFlagId = response.data.id;
-        console.log(
-          "--------------------------------------- INITIAL ID AFTER CREATION",
-          initialFlagId
-        );
       }
 
       // Close the dropdown after saving/updating the flag
@@ -161,8 +151,11 @@ const FlagIcon = ({ taskId, initialColor, initialName, initialFlagId }) => {
             placeholder="Enter flag name"
             value={flagName}
             onChange={(e) => setFlagName(e.target.value)}
+            className="input-flag"
           />
-          <button onClick={handleSaveFlag}>Save Flag</button>
+          <button onClick={handleSaveFlag} className="save-flag">
+            Save Flag
+          </button>
         </div>
       )}
       {/* Display the name of the flag */}
