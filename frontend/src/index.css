@@ -209,7 +209,7 @@ input {
    .color-option.selected {
     border: 1px solid black;
    }
-   input.flag-name{
+   input.input-flag{
     width: 100px;
     padding: 6px;
     border: 1px solid black;
@@ -218,12 +218,18 @@ input {
    }
    button.close-button{
     display: flex;
-    margin-left: 85%;
+    margin-left: 87%;
     border: 1px solid black;
+    border-radius: 4px;
    }
    button.save-flag{
     width: 40%;
     border: 1px solid black;
    }
+.info-container{
+    display: flex;
+    font-size: 14px;
+    
+}
    
    
