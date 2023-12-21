@@ -1,12 +1,19 @@
-import IconBar from './IconBar';
-import { BsCalendar2Date, BsClock, BsUpload, BsListStars, BsPlusCircle } from 'react-icons/bs';
+import IconBar from "./icons/IconBar";
+import { BsFlag, BsClock, BsUpload, BsListStars } from "react-icons/bs";
+import AddIcon from "./icons/AddIcon";
 
-const AddTodoIconBar = () => {
-  const iconArray = [BsCalendar2Date, BsClock, BsUpload, BsListStars, BsPlusCircle];
+const AddTodoIconBar = ({ addItem }) => {
+  const iconArray = [
+    BsFlag,
+    BsClock,
+    BsUpload,
+    BsListStars,
+  ];
 
   return (
-    <div>
+    <div className="icon-bar-container">
       <IconBar icons={iconArray} />
+      <AddIcon addItem={addItem} className="icon" />
     </div>
   );
 };
