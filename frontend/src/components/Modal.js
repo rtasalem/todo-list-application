@@ -7,21 +7,20 @@ const Modal = ({ mode, setShowModal, task }) => {
   const [data, setData] = useState({
     name: editMode ? task.name : '',
     description: editMode ? task.description : '',
-    endDate: editMode ? task.endDate : '',
-    completed: editMode ? task.completed : false
+    endDate: editMode ? task.endDate : ''
   });
 
   const updateData = async () => {
     try {
       if (editMode) {
         const success = await editTask(task.id, data);
-  
+
         if (success) {
           setShowModal(false);
         }
       } else {
         const success = await addTask(data.name);
-  
+
         if (success) {
           setShowModal(false);
         }
@@ -73,13 +72,6 @@ const Modal = ({ mode, setShowModal, task }) => {
             onChange={handleChange}
           />
           <br />
-          <label htmlFor="completed">Completed?</label>
-          <input
-            type="checkbox"
-            name="completed"
-            checked={data.completed}
-            onChange={handleChange}
-          />
           <br />
           <input
             className={mode}

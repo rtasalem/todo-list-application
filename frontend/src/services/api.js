@@ -69,3 +69,23 @@ export const deleteTask = async (taskId) => {
         return false;
     }
 };
+
+// Update task completion status
+export const updateTaskCompletionStatus = async (taskId, completed) => {
+    try {
+        const response = await axios.patch(`http://localhost:3000/api/v1/tasks/${taskId}`, {
+            completed: completed,
+        });
+
+        if (response.status === 200) {
+            console.log('Task completion status updated successfully.');
+            return true;
+        } else {
+            console.error('Failed to update task completion status.');
+            return false;
+        }
+    } catch (error) {
+        console.error('An error occurred:', error);
+        return false;
+    }
+};

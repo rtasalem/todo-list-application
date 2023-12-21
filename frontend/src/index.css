@@ -136,6 +136,11 @@ button:focus {
     transform: scale(1.1);
 }
 
+/* Completed state */
+.task-name.completed {
+    text-decoration: line-through;
+}
+
 /* Search */
 
 .search {
