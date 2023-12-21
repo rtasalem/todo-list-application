@@ -1,4 +1,6 @@
-const sequelize = require("./sequelize");
+const sequelize = require("./db-config.js");
+const session = require("express-session");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const User = require("./model/User");
 const Task = require("./model/Task");
 const Collection = require("./model/Collection");
@@ -16,6 +18,10 @@ Priority.belongsTo(Task);
 Task.hasMany(MediaBlob);
 MediaBlob.belongsTo(Task);
 
+const sessionStore = new SequelizeStore({
+  db: sequelize,
+});
+
 sequelize
   .sync({ force: true })
   .then(() => {
@@ -31,4 +37,5 @@ module.exports = {
   MediaBlob,
   Collection,
   Priority,
+  sessionStore,
 };

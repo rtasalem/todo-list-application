@@ -1,57 +1,64 @@
 const { User } = require("../database/associations.js");
 
 const UserService = {
-  // Get all users
   async getAllUsers() {
-    try {
-      const tasks = await User.findAll();
-      return tasks;
-    } catch (err) {
-      console.error("Error fetching users:", err.message);
-      throw err;
-    }
+    return await User.findAll();
   },
 
   async getUserById(userId) {
     try {
       const user = await User.findByPk(userId);
       if (!user) {
-        throw new Error("User not found.");
+        throw { message: "User not found.", status: 404 };
       }
       return user;
     } catch (err) {
-      console.error("Error fetching user by id:", err.message);
-      throw err;
+      throw { message: err.message, status: 500 };
     }
   },
 
   async createUser(userData) {
     try {
-      const newUser = await User.create(userData);
-      return newUser;
+      const { email, password, first_name, last_name = null } = userData;
+      const existingUser = await User.findOne({ where: { email: email } });
+      if (existingUser) {
+        throw { message: "User already exists for this email.", status: 409 };
+      }
+      return await User.create({ email, password, first_name, last_name });
     } catch (err) {
-      console.error("Error creating user:", err.message);
-      throw err;
+      throw { message: err.message, status: 500 };
+    }
+  },
+
+  async validateCredentials(userData) {
+    const { email, password } = userData;
+    try {
+      const user = await User.findOne({ where: { email: email } });
+      if (!user) {
+        throw { message: "User not found.", status: 401 };
+      }
+      const validPassword = user && password === user.password;
+      return validPassword;
+    } catch (err) {
+      throw { message: err.message, status: 500 };
     }
   },
 
   async updateUser(userId, updatedUserData) {
-    const user = await User.findByPk(userId);
     try {
       const user = await User.findByPk(userId);
       if (!user) {
         throw new Error("User not found.");
       } else {
-        await user.update(updatedTaskData);
+        await user.update(updatedUserData);
         return user;
       }
     } catch (err) {
-      console.error("Error updating user:", err.message);
-      throw err;
+      throw { message: err.message, status: 500 };
     }
   },
 
-  async patchUser(userId, updatedUserData) {
+  async patchUser(userId, patchedUserData) {
     try {
       const user = await User.findByPk(userId);
       if (!user) {
@@ -61,8 +68,7 @@ const UserService = {
         return user;
       }
     } catch (err) {
-      console.error("Error patching user:", err.message);
-      throw err;
+      throw { message: err.message, status: 500 };
     }
   },
 
@@ -75,8 +81,7 @@ const UserService = {
       await user.destroy();
       return { message: "User successfully deleted." };
     } catch (err) {
-      console.error("Error deleting user:", err.message);
-      throw err;
+      throw { message: err.message, status: 500 };
     }
   },
 };

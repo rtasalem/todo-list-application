@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:21.1.0
 
 WORKDIR /usr/app
 
@@ -10,6 +10,6 @@ RUN npm install --production=false
 
 COPY backend/ ./
 
-EXPOSE 3000
+EXPOSE 8088
 
 CMD ["node", "index.js"]

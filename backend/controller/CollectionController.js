@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const CollectionService = require("../service/CollectionService");
+const checkLogin = require("../middleware/checkLogin.js");
 
 // GET all collections:
 router.get("/", async (req, res) => {

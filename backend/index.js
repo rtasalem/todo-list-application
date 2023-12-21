@@ -1,16 +1,26 @@
 const express = require("express");
-// const session = require("express-session");
+const session = require("express-session");
+const { sessionStore } = require("./database/associations.js");
 const taskRouter = require("./controller/TaskController.js");
 const userRouter = require("./controller/UserController.js");
 const mediaRouter = require("./controller/MediaBlobController.js");
 const collectionRouter = require("./controller/CollectionController.js");
 const priorityController = require("./controller/PriorityController.js");
 
+const PORT = 8088;
 const app = express();
-
-const PORT = 3000;
-
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET_KEY || "keyboard cat",
+    store: sessionStore,
+    resave: false,
+    saveUninitialized: false,
+    store: sessionStore,
+    cookie: { secure: false },
+  })
+);
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/tasks", taskRouter);

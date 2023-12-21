@@ -1,7 +1,8 @@
 const express = require("express");
-const multer = require("multer");
 const router = express.Router();
+const multer = require("multer");
 const MediaBlobService = require("../service/MediaBlobService.js");
+const checkLogin = require("../middleware/checkLogin.js");
 const {
   S3Client,
   PutObjectCommand,

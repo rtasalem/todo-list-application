@@ -1,5 +1,5 @@
 node_modules
-npm-debug.log
-frontend
-.git
 test
+npm-debug.log
+.git
+.env

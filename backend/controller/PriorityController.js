@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const PriorityService = require("../service/PriorityService");
+const checkLogin = require("../middleware/checkLogin.js");
 
 // GET all priorities:
 router.get("/", async (req, res) => {

@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const TaskService = require("../service/TaskService");
+const checkLogin = require("../middleware/checkLogin.js");
+const handleError = require("../middleware/handleError.js");
 
 // GET all tasks:
-router.get("/", async (req, res) => {
+router.get("/", checkLogin, async (req, res) => {
   try {
     const tasks = await TaskService.getAllTasks();
     res.status(200).json(tasks);
@@ -13,7 +15,7 @@ router.get("/", async (req, res) => {
 });
 
 // GET task by id:
-router.get("/:id", async (req, res) => {
+router.get("/:id", checkLogin, async (req, res) => {
   const id = req.params.id;
   try {
     const task = await TaskService.getTaskById(id);
