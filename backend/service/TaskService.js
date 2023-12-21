@@ -1,6 +1,7 @@
 const { Task } = require("../database/associations.js");
 
 const TaskService = {
+  // Get all tasks
   async getAllTasks() {
     try {
       const tasks = await Task.findAll();
@@ -16,7 +17,7 @@ const TaskService = {
     try {
       const task = await Task.findByPk(id);
       if (!task) {
-        throw new Error("Task not found.");
+        throw new Error(`Task with id of ${id} not found.`);
       }
       return task;
     } catch (err) {
@@ -41,7 +42,7 @@ const TaskService = {
     try {
       const task = await Task.findByPk(id);
       if (!task) {
-        throw new Error("Task not found.");
+        throw new Error(`Task with id of ${id} not found.`);
       } else {
         await task.update(updatedTaskData);
         return task;
@@ -57,7 +58,7 @@ const TaskService = {
     try {
       const task = await Task.findByPk(id);
       if (!task) {
-        throw new Error("Task not found.");
+        throw new Error(`Task with id of ${id} not found.`);
       } else {
         await task.update(patchedTaskData);
         return task;
