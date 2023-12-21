@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const TaskService = require("../service/TaskService");
+const Priority = require("../database/model/Priority");
 
 // GET all tasks:
 router.get("/", async (req, res) => {
@@ -74,6 +75,24 @@ router.delete("/:id", async (req, res) => {
     }
   } catch (err) {
     res.status(500).json({ message: "Error deleting task." });
+  }
+});
+
+router.get("/priority/:taskId", async (req, res) => {
+  const taskId = req.params.taskId;
+
+  try {
+    const priority = await TaskService.getPriorityByTaskId(taskId);
+
+    if (!priority) {
+      res
+        .status(404)
+        .json({ message: "Priority not found for the given taskId." });
+    } else {
+      res.status(200).json(priority);
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 

@@ -3,7 +3,7 @@ const express = require("express");
 const taskRouter = require("./controller/TaskController.js");
 const userRouter = require("./controller/UserController.js");
 const mediaRouter = require("./controller/MediaBlobController.js");
-const cors = require("cors")
+const cors = require("cors");
 const app = express();
 
 app.use(cors());

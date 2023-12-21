@@ -124,6 +124,16 @@ button:focus {
     display: flex;
     align-items: center;
 }
+.icon-bar {
+    display: flex;
+    align-items: center;
+}
+
+.icon-bar-container .icon {
+    font-size: 25px;
+    cursor: pointer;
+    margin: 0 10px;
+}
 
 .icon {
     font-size: 25px;
@@ -265,18 +275,27 @@ button:focus {
 
 .flag-icon-container {
     position: relative;
-    display: inline-block;
-}
-
-.flag-dropdown {
+    display: flex;
+    font-size: 20px;
+    align-items: center;
+    width: 50%;
+    
+    
+   }
+   
+    .flag-dropdown {
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    min-width: 230px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-}
-
-.color-option {
+    width: 100px;
+    border: 1px solid black;
+    border-radius: 5px;
+    
+   }
+   
+   .color-option {
     width: 24px;
     height: 24px;
     display: inline-block;
@@ -287,8 +306,26 @@ button:focus {
 .color-option:hover {
     background-color: #ddd;
     cursor: pointer;
-}
-
-.color-option.selected {
-    border: 2px solid black;
-}
+   }
+   
+   .color-option.selected {
+    border: 1px solid black;
+   }
+   input.flag-name{
+    width: 100px;
+    padding: 6px;
+    border: 1px solid black;
+    margin-left: 10px;
+    
+   }
+   button.close-button{
+    display: flex;
+    margin-left: 85%;
+    border: 1px solid black;
+   }
+   button.save-flag{
+    width: 40%;
+    border: 1px solid black;
+   }
+   
+   
