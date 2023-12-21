@@ -1,4 +1,4 @@
-const { Task } = require("../database/associations.js");
+const { Task, Priority } = require("../database/associations.js");
 
 const TaskService = {
   async getAllTasks() {
@@ -79,6 +79,23 @@ const TaskService = {
       return { message: "Task successfully deleted." };
     } catch (err) {
       console.error("Error deleting task:", err.message);
+      throw err;
+    }
+  },
+  async getPriorityByTaskId(taskId) {
+    try {
+      const task = await Task.findByPk(taskId, {
+        include: [{ model: Priority, attributes: ["id", "name", "color"] }],
+      });
+
+      if (!task || !task.Priority) {
+        throw new Error("Priority not found for the given taskId.");
+      }
+
+      const { id, name, color } = task.Priority;
+      return { id, name, color };
+    } catch (err) {
+      console.error("Error getting Priority by TaskId:", err.message);
       throw err;
     }
   },
