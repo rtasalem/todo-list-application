@@ -3,7 +3,7 @@ import AddTodo from "./components/AddTodo";
 import TodoList from "./components/TodoList";
 import Auth from "./components/Auth";
 
-const App = () => {
+const App = ({ toggleTheme }) => {
     const authToken = true;
 
     return (
@@ -11,6 +11,7 @@ const App = () => {
             {!authToken && <Auth />}
             {authToken &&
                 <>
+                    <button onClick={toggleTheme}>Toggle Theme</button>
                     <header>
                         <Header />
                     </header>

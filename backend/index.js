@@ -8,7 +8,7 @@ const app = express();
 
 app.use(cors());
 
-const PORT = 8088;
+const PORT = 3000;
 
 app.use(express.json());
 
