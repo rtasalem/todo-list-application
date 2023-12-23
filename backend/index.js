@@ -5,11 +5,9 @@ const userRouter = require("./controller/UserController.js");
 const mediaRouter = require("./controller/MediaBlobController.js");
 const cors = require("cors")
 const app = express();
+const PORT = 3000;
 
 app.use(cors());
-
-const PORT = 8088;
-
 app.use(express.json());
 
 app.use("/api/v1/users", userRouter);

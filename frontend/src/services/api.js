@@ -18,10 +18,24 @@ export const getTasks = async () => {
   };
 
 // Add task
-export const addTask = async (taskName) => {
+export const addTask = async (taskName, taskDescription, endDate) => {
     try {
+        // Function to format date to "YYYY-MM-DD" format
+        const formatDate = (dateString) => {
+            const dateObject = new Date(dateString);
+            const year = dateObject.getFullYear();
+            const month = String(dateObject.getMonth() + 1).padStart(2, '0');
+            const day = String(dateObject.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        };
+
+        // Format the endDate property if it exists
+        const formattedEndDate = endDate ? formatDate(endDate) : null;
+
         const response = await axios.post('http://localhost:3000/api/v1/tasks', {
-            name: taskName
+            name: taskName,
+            description: taskDescription,
+            endDate: formattedEndDate,
         });
 
         if (response.status === 201) {
@@ -35,6 +49,7 @@ export const addTask = async (taskName) => {
         return false;
     }
 };
+
 
 // Edit task
 export const editTask = async (taskId, newData) => {
