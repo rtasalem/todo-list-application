@@ -2,14 +2,24 @@
 import React, { useState, useEffect } from "react";
 import { BsFlag } from "react-icons/bs";
 import axios from "axios";
-import "../index.css"; // Assuming the CSS file is named "FlagIcon.css"
+import "../index.css";
 
 const DEFAULT_FLAG = { name: "Black", color: "#000000" };
 
-const FlagIcon = ({ taskId, initialColor, initialName, initialFlagId }) => {
+const FlagIcon = ({
+  taskId,
+  initialColor,
+  initialName,
+  initialFlagId,
+  onDeleteFlag,
+  onSaveFlagSuccess,
+}) => {
   const [showDropdown, setShowDropdown] = useState(false);
-  const [selectedColor, setSelectedColor] = useState(DEFAULT_FLAG);
-  const [flagName, setFlagName] = useState("");
+  const [selectedColor, setSelectedColor] = useState(
+    initialColor || DEFAULT_FLAG.color
+  );
+  const [flagName, setFlagName] = useState(initialName || "");
+  const [localFlagId, setLocalFlagId] = useState(initialFlagId);
 
   const colors = [
     { name: "Red", color: "#FF0000" },
@@ -27,77 +37,69 @@ const FlagIcon = ({ taskId, initialColor, initialName, initialFlagId }) => {
 
   const handleSaveFlag = async () => {
     try {
-      if (taskId && initialFlagId) {
-        // Flag already has an id, so it exists in the database and needs to be updated
-        const response = await axios.put(
-          `http://localhost:3000/api/v1/priorities/${initialFlagId}`,
+      let response;
+
+      if (taskId && localFlagId) {
+        // Update existing flag
+        response = await axios.put(
+          `http://localhost:3000/api/v1/priorities/${localFlagId}`,
           {
             name: flagName,
             color: selectedColor.color,
             TaskId: taskId,
           }
         );
-
-        // Update state with the new flag information
-        setSelectedColor({
-          id: selectedColor.id,
-          name: flagName,
-          color: selectedColor.color,
-        });
-
-        console.log("Flag updated:", response.data);
+        setLocalFlagId(response.data.id);
       } else {
-        // Flag doesn't have an id, so it's a new flag and needs to be created
-        const response = await axios.post(
-          "http://localhost:3000/api/v1/priorities",
-          {
-            name: flagName,
-            color: selectedColor.color,
-            TaskId: taskId,
-          }
-        );
-
-        // Update state with the new flag information
-        setSelectedColor({
-          id: response.data.id,
+        // Create a new flag
+        response = await axios.post("http://localhost:3000/api/v1/priorities", {
           name: flagName,
           color: selectedColor.color,
+          TaskId: taskId,
         });
 
-        console.log("Flag created:", response.data);
+        setLocalFlagId(response.data.id);
       }
 
-      // Close the dropdown after saving/updating the flag
-      setShowDropdown(false);
+      setSelectedColor({
+        id: localFlagId,
+        name: flagName,
+        color: selectedColor.color,
+      });
 
-      // You may want to trigger a refresh of your data or update the UI here
+      console.log("Flag saved:", response.data);
+
+      // Trigger the callback to update the entity
+      onSaveFlagSuccess({
+        flagId: localFlagId,
+        flagName,
+        flagColor: selectedColor,
+      });
+
+      setShowDropdown(false); // Close the dropdown after saving
     } catch (error) {
       console.error("Error saving/updating flag:", error);
     }
   };
 
   const closeDropdownOnOutsideClick = (e) => {
-    // Check if the clicked element is not part of the flag icon or its dropdown
     if (!e.target.closest(".flag-icon-container")) {
       setShowDropdown(false);
     }
   };
+
   const handleDeleteFlag = async () => {
     try {
-      console.log(initialFlagId);
-      if (initialFlagId !== null) {
-        // Only attempt to delete if the flag has an id
+      if (localFlagId !== null) {
         const response = await axios.delete(
-          `http://localhost:3000/api/v1/priorities/${initialFlagId}`
+          `http://localhost:3000/api/v1/priorities/${localFlagId}`
         );
         console.log("Flag deleted:", response.data);
-        initialFlagId = undefined;
-        console.log(initialFlagId);
-
-        // Set the default flag and reset the flag name after deletion
-        setSelectedColor(DEFAULT_FLAG);
+        console.log(taskId);
+        setLocalFlagId(null);
+        onDeleteFlag();
+        setSelectedColor(DEFAULT_FLAG.color);
         setFlagName("");
-        setShowDropdown(false);
       } else {
         console.warn("Cannot delete flag without an id.");
       }
@@ -107,18 +109,25 @@ const FlagIcon = ({ taskId, initialColor, initialName, initialFlagId }) => {
   };
 
   useEffect(() => {
-    // Set the initial color and name from the database when the component mounts
     setSelectedColor({ name: "Custom", color: initialColor });
-    setFlagName(initialName || ""); // Set the initial flag name or an empty string
+    setFlagName(initialName || "");
 
-    // Attach a click event listener to the document to close the dropdown on outside click
     document.addEventListener("click", closeDropdownOnOutsideClick);
 
-    // Cleanup the event listener on component unmount
     return () => {
       document.removeEventListener("click", closeDropdownOnOutsideClick);
     };
   }, [initialColor, initialName]);
+
+  useEffect(() => {
+    // Reset state after the flag is deleted or updated
+    if (!initialFlagId) {
+      setSelectedColor(DEFAULT_FLAG);
+      setFlagName("");
+      setLocalFlagId(null);
+      setShowDropdown(false);
+    }
+  }, [initialFlagId]); // Run this effect when initialFlagId changes
 
   return (
     <div className="flag-icon-container">
@@ -158,7 +167,6 @@ const FlagIcon = ({ taskId, initialColor, initialName, initialFlagId }) => {
           </button>
         </div>
       )}
-      {/* Display the name of the flag */}
       <p style={{ color: selectedColor.color }}>{flagName}</p>
       <button onClick={handleDeleteFlag}>Delete Flag</button>
     </div>

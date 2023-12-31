@@ -16,16 +16,6 @@ Task.belongsTo(User);
 Task.hasMany(MediaBlob);
 MediaBlob.belongsTo(Task);
 
-/*Priority.beforeCreate(async (priority, options) => {
-  const existingPriority = await Priority.findOne({
-    where: { taskId: priority.taskId },
-  });
-
-  if (existingPriority) {
-    throw new Error("Priority with this taskId already exists.");
-  }
-});*/
-
 sequelize
   .sync({ force: true })
   .then(() => {

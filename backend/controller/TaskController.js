@@ -78,6 +78,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+//get a priority by taskId
 router.get("/priority/:taskId", async (req, res) => {
   const taskId = req.params.taskId;
 

@@ -1,11 +1,18 @@
 import { useState } from "react";
 import React from "react";
 import TodoListIconBar from "./TodoListIconBar";
+import axios from "axios";
 import Modal from "./Modal";
-import FlagIcon from "./Priority"; // Import FlagIcon component
-import { deleteTask, updateTaskCompletionStatus } from "../services/api";
+import FlagIcon from "./FlagIcon"; // Correct import statement
 
-const ListItem = ({ task, onDeleteSuccess }) => {
+const ListItem = ({
+  task,
+  onDeleteSuccess,
+  onFlagDeleteSuccess,
+  onSaveFlagSuccess,
+  editItem,
+  onDeleteFlag,
+}) => {
   const [showModal, setShowModal] = useState(false);
   const [completed, setCompleted] = useState(task.completed);
 
@@ -34,11 +41,15 @@ const ListItem = ({ task, onDeleteSuccess }) => {
       </button>
 
       <TodoListIconBar deleteItem={deleteItem} />
+
       <FlagIcon
+        key={`${task.id}-${task.flag.id}`}
         taskId={task.id}
         initialColor={task.flag.color}
         initialName={task.flag.name}
         initialFlagId={task.flag.id}
+        onDeleteFlag={onDeleteFlag}
+        onSaveFlagSuccess={onSaveFlagSuccess}
       />
       {showModal && (
         <Modal mode={"edit"} setShowModal={setShowModal} task={task} />

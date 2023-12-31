@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+// TodoList.js
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ListItem from "./ListItem";
-import DEFAULT_FLAG from "./Priority";
 import { getTasks, updateTaskCompletionStatus } from "../services/api";
 import { BsSearch } from "react-icons/bs";
 import { BsFilterSquare } from "react-icons/bs";
 import Icon from "./icons/Icon";
 
+const DEFAULT_FLAG = { name: "Black", color: "#000000" };
 const TodoList = () => {
   const [tasks, setTasks] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -19,7 +20,6 @@ const TodoList = () => {
           const tasksWithFlags = await Promise.all(
             tasksData.data.map(async (task) => {
               try {
-                console.log("**************", task.id);
                 const flagResponse = await axios.get(
                   `http://localhost:3000/api/v1/tasks/priority/${task.id}`
                 );
@@ -68,6 +68,42 @@ const TodoList = () => {
     task.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handleFlagDeleteSuccess = (taskId, flagId) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) => {
+        if (task.id === taskId) {
+          return {
+            ...task,
+            flag: {
+              id: undefined,
+              name: null,
+              color: undefined,
+            },
+          };
+        }
+        return task;
+      })
+    );
+  };
+
+  const handleFlagSaveSuccess = (taskId, updatedFlag) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) => {
+        if (task.id === taskId) {
+          return {
+            ...task,
+            flag: {
+              id: updatedFlag.flagId,
+              name: updatedFlag.flagName,
+              color: updatedFlag.flagColor,
+            },
+          };
+        }
+        return task;
+      })
+    );
+  };
+
   return (
     <div className="your-todo-list-container">
       <h2>Your To-Do Lists</h2>
@@ -98,9 +134,8 @@ const TodoList = () => {
           onToggleComplete={(completed) =>
             handleToggleComplete(task.id, completed)
           }
-          initialFlagColor={task.flag.color}
-          initialFlagName={task.flag.name}
-          initialFlagId={task.flag.id}
+          onSaveFlagSuccess={handleFlagSaveSuccess}
+          onDeleteFlag={handleFlagDeleteSuccess}
         />
       ))}
     </div>
