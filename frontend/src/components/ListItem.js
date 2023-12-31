@@ -1,11 +1,17 @@
-import { useState } from "react";
-import React from "react";
-import TodoListIconBar from "./TodoListIconBar";
+import React, { useState } from "react";
 import axios from "axios";
 import Modal from "./Modal";
-import FlagIcon from "./Priority"; // Import FlagIcon component
+import TodoListIconBar from "./TodoListIconBar";
+import FlagIcon from "./FlagIcon"; // Correct import statement
 
-const ListItem = ({ task, onDeleteSuccess, editItem }) => {
+const ListItem = ({
+  task,
+  onDeleteSuccess,
+  onFlagDeleteSuccess,
+  onSaveFlagSuccess,
+  editItem,
+  onDeleteFlag,
+}) => {
   const [showModal, setShowModal] = useState(false);
 
   const deleteItem = async () => {
@@ -34,13 +40,15 @@ const ListItem = ({ task, onDeleteSuccess, editItem }) => {
       </button>
 
       <TodoListIconBar deleteItem={deleteItem} />
-      {/* Pass the task ID to the FlagIcon component */}
-      {console.log("Task ID:", task.id)}
+
       <FlagIcon
+        key={`${task.id}-${task.flag.id}`}
         taskId={task.id}
         initialColor={task.flag.color}
         initialName={task.flag.name}
         initialFlagId={task.flag.id}
+        onDeleteFlag={onDeleteFlag}
+        onSaveFlagSuccess={onSaveFlagSuccess}
       />
 
       {showModal && (
