@@ -6,6 +6,8 @@ import TodoList from "./components/TodoList";
 import Calendar from "./components/pages/Calendar"
 
 const App = () => {
+    const authToken = true;
+
     return (
         <div className="app">
             {!authToken && <Auth />}
