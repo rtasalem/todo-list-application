@@ -1,34 +1,36 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import ListHeader from "./components/ListHeader";
+import Header from "./components/Header";
 import AddTodo from "./components/AddTodo";
 import TodoList from "./components/TodoList";
-import Calendar from "./components/pages/Calendar"
+import Calendar from "./components/pages/Calendar";
+import Auth from "./components/Auth";
+import Search from "./components/Search";
 
 const App = () => {
-    const authToken = true;
+  const authToken = true;
 
-    return (
-        <div className="app">
-            {!authToken && <Auth />}
-            {authToken &&
-                <>
-            <header>
-              <ListHeader />
-            </header>
-            <main>
-              <AddTodo />
-              <Search />
-              <TodoList />
-          
-              <Routes>
-                <Route path='/' />
-                <Route path='/calendar' element={<Calendar />} />
-              </Routes>
-            </main>
-                    </>
-                }
-        </div>
+  return (
+    <div className="app">
+      {!authToken && <Auth />}
+      {authToken && (
+        <Router>
+          <header>
+            <Header />
+          </header>
+          <main>
+            <AddTodo />
+            <Search />
+            <TodoList />
+
+            <Routes>
+              <Route path="/" />
+              <Route path="/calendar" element={<Calendar />} />
+            </Routes>
+          </main>
+        </Router>
+      )}
+    </div>
   );
 };
 

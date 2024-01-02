@@ -4,6 +4,7 @@ import TodoListIconBar from "./TodoListIconBar";
 import axios from "axios";
 import Modal from "./Modal";
 import FlagIcon from "./FlagIcon"; // Correct import statement
+import { deleteTask, updateTaskCompletionStatus } from "../services/api";
 
 const ListItem = ({
   task,
@@ -30,11 +31,6 @@ const ListItem = ({
     await updateTaskCompletionStatus(task.id, updatedCompletedStatus);
   };
 
-  return (
-    <li className="form-container">
-      <div className="info-container">
-        <p className="task-name">{task.name}</p>
-      </div>
   return (
     <li className="form-container">
       <div className="info-container">
