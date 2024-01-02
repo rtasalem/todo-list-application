@@ -13,8 +13,8 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET_KEY || "keyboard cat",
     store: sessionStore,
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
     store: sessionStore,
     cookie: { secure: false },
   })

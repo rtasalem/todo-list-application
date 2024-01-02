@@ -4,13 +4,14 @@ const UserService = require("../service/UserService");
 const checkLogin = require("../middleware/checkLogin.js");
 const handleError = require("../middleware/handleError.js");
 
+router.use(handleError);
+
 // GET logout user:
 router.get("/logout", async (req, res, next) => {
   try {
     req.session.destroy(function () {
       console.log("Logout successful.");
     });
-    res.redirect("/login");
   } catch (err) {
     next(err);
   }
@@ -67,10 +68,13 @@ router.post("/login", async (req, res, next) => {
   try {
     const user = req.body;
 
-    const isValidCredentials = await UserService.validateCredentials(user);
+    const [validCredentials, userId] = await UserService.validateCredentials(
+      user
+    );
 
-    if (isValidCredentials) {
-      req.session.user = user.email;
+    if (validCredentials) {
+      req.session.userId = userId;
+      console.log(req.session.userId);
       res.status(200).json({ message: "Login successful." });
     } else {
       res.status(401).json({ message: "Invalid credentials." });
@@ -81,7 +85,7 @@ router.post("/login", async (req, res, next) => {
 });
 
 // UPDATE user:
-router.put("/:id", checkLogin, async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   const id = req.params.id;
   const updatedUserData = req.body;
   try {
@@ -93,7 +97,7 @@ router.put("/:id", checkLogin, async (req, res, next) => {
 });
 
 // PATCH user:
-router.patch("/:id", checkLogin, async (req, res, next) => {
+router.patch("/:id", async (req, res, next) => {
   const id = req.params.id;
   const updatedUserData = req.body;
   try {
@@ -105,7 +109,7 @@ router.patch("/:id", checkLogin, async (req, res, next) => {
 });
 
 // DELETE user by id:
-router.delete("/:id", checkLogin, async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   const id = req.params.id;
   try {
     const deletedUser = await UserService.deleteUserById(id);
@@ -118,7 +122,5 @@ router.delete("/:id", checkLogin, async (req, res, next) => {
     next(err);
   }
 });
-
-router.use(handleError);
 
 module.exports = router;

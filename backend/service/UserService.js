@@ -38,7 +38,7 @@ const UserService = {
         throw { message: "User not found.", status: 401 };
       }
       const validPassword = user && password === user.password;
-      return validPassword;
+      return [validPassword, user.id];
     } catch (err) {
       throw { message: err.message, status: 500 };
     }
