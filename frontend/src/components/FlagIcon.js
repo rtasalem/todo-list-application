@@ -43,7 +43,7 @@ const FlagIcon = ({
       if (taskId && localFlagId) {
         // Update existing flag
         response = await axios.put(
-          `http://localhost:3000/api/v1/priorities/${localFlagId}`,
+          `http://localhost:8088/api/v1/priorities/${localFlagId}`,
           {
             name: flagName,
             color: selectedColor.color,
@@ -53,7 +53,7 @@ const FlagIcon = ({
         setLocalFlagId(response.data.id);
       } else {
         // Create a new flag
-        response = await axios.post("http://localhost:3000/api/v1/priorities", {
+        response = await axios.post("http://localhost:8088/api/v1/priorities", {
           name: flagName,
           color: selectedColor.color,
           TaskId: taskId,
@@ -93,7 +93,7 @@ const FlagIcon = ({
     try {
       if (localFlagId !== null) {
         const response = await axios.delete(
-          `http://localhost:3000/api/v1/priorities/${localFlagId}`
+          `http://localhost:8088/api/v1/priorities/${localFlagId}`
         );
         console.log("Flag deleted:", response.data);
         console.log(taskId);
