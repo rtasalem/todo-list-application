@@ -39,8 +39,10 @@ const TodoList = () => {
           setTasks(tasksWithFlags);
         } else {
           console.error("Failed to fetch tasks.");
+          console.error("Failed to fetch tasks.");
         }
       } catch (error) {
+        console.error("An error occurred:", error);
         console.error("An error occurred:", error);
       }
     };

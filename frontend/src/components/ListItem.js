@@ -35,7 +35,15 @@ const ListItem = ({
       <div className="info-container">
         <p className="task-name">{task.name}</p>
       </div>
+  return (
+    <li className="form-container">
+      <div className="info-container">
+        <p className="task-name">{task.name}</p>
+      </div>
 
+      <button className="edit" onClick={() => setShowModal(true)}>
+        EDIT
+      </button>
       <button className="edit" onClick={() => setShowModal(true)}>
         EDIT
       </button>

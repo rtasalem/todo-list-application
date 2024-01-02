@@ -10,6 +10,8 @@ const AddTodo = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     const success = await addTask(taskName);
 
@@ -19,6 +21,9 @@ const AddTodo = () => {
     }
   };
 
+  const handleInputChange = (e) => {
+    setTaskName(e.target.value);
+  };
   const handleInputChange = (e) => {
     setTaskName(e.target.value);
   };
