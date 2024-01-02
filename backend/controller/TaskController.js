@@ -2,6 +2,10 @@ const express = require("express");
 const router = express.Router();
 const TaskService = require("../service/TaskService");
 const Priority = require("../database/model/Priority");
+const checkLogin = require("../middleware/checkLogin.js");
+const handleError = require("../middleware/handleError.js");
+
+router.use(handleError);
 
 // GET all tasks:
 router.get("/", async (req, res) => {
@@ -30,9 +34,21 @@ router.get("/:id", async (req, res) => {
 
 // POST create task:
 router.post("/", async (req, res) => {
-  const taskData = req.body;
+  const {
+    name,
+    description = null,
+    endDate = null,
+    completed = false,
+  } = req.body;
+  const UserId = req.session.userId;
   try {
-    const newTask = await TaskService.createTask(taskData);
+    const newTask = await TaskService.createTask({
+      name,
+      description,
+      endDate,
+      completed,
+      UserId,
+    });
     res.status(201).json(newTask);
   } catch (err) {
     res.status(400).json({ error: err.message });

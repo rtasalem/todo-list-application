@@ -17,12 +17,11 @@ const TodoList = () => {
       try {
         const tasksData = await getTasks();
         if (tasksData.status === 200) {
-          console.log(tasksData);
           const tasksWithFlags = await Promise.all(
             tasksData.data.map(async (task) => {
               try {
                 const flagResponse = await axios.get(
-                  `http://localhost:3000/api/v1/tasks/priority/${task.id}`
+                  `http://localhost:8088/api/v1/tasks/priority/${task.id}`
                 );
 
                 const flag = flagResponse.data || DEFAULT_FLAG;
@@ -108,7 +107,6 @@ const TodoList = () => {
   return (
     <div className="your-todo-list-container">
       <h2>Your To-Do Lists</h2>
-
       <div className="search">
         <div className="form-container">
           <form>

@@ -33,7 +33,7 @@ services:
       context: .
       dockerfile: backend/Dockerfile
     ports:
-      - 3000:3000
+      - 8088:8088
     volumes:
       - ./backend:/usr/app
     environment:

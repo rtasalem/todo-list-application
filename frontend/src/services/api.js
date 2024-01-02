@@ -3,12 +3,13 @@ import axios from "axios";
 // Get tasks
 export const getTasks = async () => {
   try {
-    const response = await axios.get("http://localhost:3000/api/v1/tasks");
+    const response = await axios.get("http://localhost:8088/api/v1/tasks");
 
     if (response.status === 200) {
+      // Check.
       return response;
     } else {
-      console.error("Failed to fetch tasks in api.js.");
+      console.error("Failed to fetch tasks.");
       return [];
     }
   } catch (error) {
@@ -18,10 +19,24 @@ export const getTasks = async () => {
 };
 
 // Add task
-export const addTask = async (taskName) => {
+export const addTask = async (taskName, taskDescription, endDate) => {
   try {
-    const response = await axios.post("http://localhost:3000/api/v1/tasks", {
+    // Function to format date to "YYYY-MM-DD" format
+    const formatDate = (dateString) => {
+      const dateObject = new Date(dateString);
+      const year = dateObject.getFullYear();
+      const month = String(dateObject.getMonth() + 1).padStart(2, "0");
+      const day = String(dateObject.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    };
+
+    // Format the endDate property if it exists
+    const formattedEndDate = endDate ? formatDate(endDate) : null;
+
+    const response = await axios.post("http://localhost:8088/api/v1/tasks", {
       name: taskName,
+      description: taskDescription,
+      endDate: formattedEndDate,
     });
 
     if (response.status === 201) {
@@ -42,7 +57,7 @@ export const addTask = async (taskName) => {
 export const editTask = async (taskId, newData) => {
   try {
     const response = await axios.put(
-      `http://localhost:3000/api/v1/tasks/${taskId}`,
+      `http://localhost:8088/api/v1/tasks/${taskId}`,
       newData
     );
 
@@ -63,7 +78,7 @@ export const editTask = async (taskId, newData) => {
 export const deleteTask = async (taskId) => {
   try {
     const response = await axios.delete(
-      `http://localhost:3000/api/v1/tasks/${taskId}`
+      `http://localhost:8088/api/v1/tasks/${taskId}`
     );
     if (response.status === 200) {
       return true;
@@ -81,7 +96,7 @@ export const deleteTask = async (taskId) => {
 export const updateTaskCompletionStatus = async (taskId, completed) => {
   try {
     const response = await axios.patch(
-      `http://localhost:3000/api/v1/tasks/${taskId}`,
+      `http://localhost:8088/api/v1/tasks/${taskId}`,
       {
         completed: completed,
       }

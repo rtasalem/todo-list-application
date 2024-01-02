@@ -1,16 +1,16 @@
 const express = require("express");
 const session = require("express-session");
 const { sessionStore } = require("./database/associations.js");
+const cors = require("cors");
 const taskRouter = require("./controller/TaskController.js");
 const userRouter = require("./controller/UserController.js");
 const mediaRouter = require("./controller/MediaBlobController.js");
 const collectionRouter = require("./controller/CollectionController.js");
 const priorityController = require("./controller/PriorityController.js");
-const cors = require("cors");
 
-const PORT = 3000;
+const PORT = 8088;
 const app = express();
-app.use(cors());
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET_KEY || "keyboard cat",
@@ -21,6 +21,7 @@ app.use(
     cookie: { secure: false },
   })
 );
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

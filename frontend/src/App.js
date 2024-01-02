@@ -12,24 +12,20 @@ const App = () => {
 
   return (
     <div className="app">
-      {!authToken && <Auth />}
-      {authToken && (
-        <Router>
-          <header>
-            <Header />
-          </header>
-          <main>
-            <AddTodo />
-            <Search />
-            <TodoList />
+      <Router>
+        <header>
+          <Header />
+        </header>
+        <main>
+          <AddTodo />
+          <TodoList />
 
-            <Routes>
-              <Route path="/" />
-              <Route path="/calendar" element={<Calendar />} />
-            </Routes>
-          </main>
-        </Router>
-      )}
+          <Routes>
+            <Route path="/" />
+            <Route path="/calendar" element={<Calendar />} />
+          </Routes>
+        </main>
+      </Router>
     </div>
   );
 };

@@ -1,7 +1,9 @@
 const express = require("express");
-const multer = require("multer");
 const router = express.Router();
+const multer = require("multer");
 const MediaBlobService = require("../service/MediaBlobService.js");
+const checkLogin = require("../middleware/checkLogin.js");
+const handleError = require("../middleware/handleError.js");
 const {
   S3Client,
   PutObjectCommand,
@@ -26,6 +28,8 @@ const bucketName = process.env.BUCKET_NAME;
 const s3 = new S3Client({
   region: process.env.BUCKET_REGION,
 });
+
+router.use(handleError);
 
 //GET all Media:
 router.get("/", async (req, res) => {
@@ -77,11 +81,12 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-//This will have to match formData name e.g. formData.append("media", file)
-//upload.single("media");
 //POST create Media:
 router.post("/", upload.single("media"), async (req, res) => {
   const { name, caption } = req.body;
+  if (!req.file) {
+    return res.status(400).send("No file uploaded.");
+  }
   const mimeType = req.file.mimetype;
 
   const fileKey = randomFileName();

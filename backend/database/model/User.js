@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const sequelize = require("../sequelize");
+const sequelize = require("../db-config.js");
 
 const User = sequelize.define(
   "User",
@@ -20,9 +20,6 @@ const User = sequelize.define(
     password: {
       type: DataTypes.STRING(64),
       allowNull: false,
-      validate: {
-        is: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*]).{10,}$/i,
-      },
     },
     first_name: {
       type: DataTypes.STRING(50),

@@ -29,6 +29,19 @@ const ListItem = ({
 
     await updateTaskCompletionStatus(task.id, updatedCompletedStatus);
   };
+  const deleteItem = async () => {
+    const success = await deleteTask(task.id);
+    if (success) {
+      onDeleteSuccess(task.id);
+    }
+  };
+
+  const toggleComplete = async () => {
+    const updatedCompletedStatus = !completed;
+    setCompleted(updatedCompletedStatus);
+
+    await updateTaskCompletionStatus(task.id, updatedCompletedStatus);
+  };
 
   return (
     <li className="form-container">
@@ -41,7 +54,6 @@ const ListItem = ({
       </button>
 
       <TodoListIconBar deleteItem={deleteItem} />
-
       <FlagIcon
         key={`${task.id}-${task.flag.id}`}
         taskId={task.id}
