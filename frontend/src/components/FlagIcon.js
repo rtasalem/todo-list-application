@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { BsFlag } from "react-icons/bs";
 import axios from "axios";
 import "../index.css";
+import setShowModal from "./Modal";
 
 const DEFAULT_FLAG = { name: "Black", color: "#000000" };
 
@@ -130,7 +131,11 @@ const FlagIcon = ({
   }, [initialFlagId]); // Run this effect when initialFlagId changes
 
   return (
-    <div className="flag-icon-container">
+    <div
+      className={`flag-icon-container ${
+        setShowModal ? "no-pointer-events" : ""
+      }`}
+    >
       <BsFlag
         style={{ color: selectedColor.color }}
         onClick={() => setShowDropdown(!showDropdown)}

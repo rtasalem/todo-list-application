@@ -202,6 +202,7 @@ button:focus {
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    z-index: 2;
 }
 
 .modal .form-title-container {
@@ -335,5 +336,3 @@ button:focus {
     font-size: 14px;
     
 }
-   
-   

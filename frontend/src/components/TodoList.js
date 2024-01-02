@@ -17,6 +17,7 @@ const TodoList = () => {
       try {
         const tasksData = await getTasks();
         if (tasksData.status === 200) {
+          console.log(tasksData);
           const tasksWithFlags = await Promise.all(
             tasksData.data.map(async (task) => {
               try {
@@ -38,11 +39,9 @@ const TodoList = () => {
 
           setTasks(tasksWithFlags);
         } else {
-          console.error("Failed to fetch tasks.");
-          console.error("Failed to fetch tasks.");
+          console.error("Failed to fetch tasks in todolist.");
         }
       } catch (error) {
-        console.error("An error occurred:", error);
         console.error("An error occurred:", error);
       }
     };

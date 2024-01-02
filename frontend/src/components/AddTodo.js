@@ -10,6 +10,7 @@ const AddTodo = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Getting to the handleSubmit");
     const success = await addTask(taskName);
 
     if (success) {

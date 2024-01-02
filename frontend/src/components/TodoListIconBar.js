@@ -6,7 +6,7 @@ import TrashIcon from "./icons/TrashIcon";
 import FlagIcon from "./FlagIcon";
 
 const TodoListIconBar = ({ checkItem, completed, editItem, deleteItem }) => {
-  const iconArray = [FlagIcon, BsImage, BsPlayCircle];
+  const iconArray = [BsImage, BsPlayCircle];
 
   return (
     <div className="icon-bar-container">
