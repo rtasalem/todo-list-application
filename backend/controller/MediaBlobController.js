@@ -81,8 +81,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-//This will have to match formData name e.g. formData.append("media", file)
-//upload.single("media");
 //POST create Media:
 router.post("/", upload.single("media"), async (req, res) => {
   const { name, caption } = req.body;

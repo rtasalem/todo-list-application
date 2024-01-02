@@ -1,6 +1,7 @@
 const express = require("express");
 const session = require("express-session");
 const { sessionStore } = require("./database/associations.js");
+const cors = require("cors");
 const taskRouter = require("./controller/TaskController.js");
 const userRouter = require("./controller/UserController.js");
 const mediaRouter = require("./controller/MediaBlobController.js");
@@ -19,6 +20,7 @@ app.use(
     cookie: { secure: false },
   })
 );
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

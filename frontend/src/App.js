@@ -1,21 +1,23 @@
-import ListHeader from "./components/ListHeader";
+import Header from "./components/Header";
 import AddTodo from "./components/AddTodo";
-import Search from "./components/Search";
 import TodoList from "./components/TodoList";
 
 const App = () => {
+  const authToken = true;
+
   return (
     <div className="app">
-      <header>
-        <ListHeader />
-      </header>
-      <main>
-        <AddTodo />
-        <Search />
-        <TodoList />
-      </main>
+      <>
+        <header>
+          <Header />
+        </header>
+        <main>
+          <AddTodo />
+          <TodoList />
+        </main>
+      </>
     </div>
   );
-}
+};
 
 export default App;
