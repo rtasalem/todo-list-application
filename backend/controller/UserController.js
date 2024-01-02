@@ -10,7 +10,7 @@ router.use(handleError);
 router.get("/logout", async (req, res, next) => {
   try {
     req.session.destroy(function () {
-      console.log("Logout successful.");
+      res.status(200).json({ message: "Logout successful." });
     });
   } catch (err) {
     next(err);
@@ -74,7 +74,6 @@ router.post("/login", async (req, res, next) => {
 
     if (validCredentials) {
       req.session.userId = userId;
-      console.log(req.session.userId);
       res.status(200).json({ message: "Login successful." });
     } else {
       res.status(401).json({ message: "Invalid credentials." });
