@@ -7,5 +7,5 @@ class TestData {
     static searchFormInputPlaceholder = "Search";
     static toDoListsSectionHeader = "Your To-Do Lists";
   }
-  
-  module.exports = TestData;
+
+module.exports = TestData;
