@@ -2,25 +2,32 @@ import { useState } from "react";
 import { editTask, addTask } from "../services/api";
 
 const Modal = ({ mode, setShowModal, task }) => {
-  const editMode = mode === 'edit';
+  const editMode = mode === "edit";
 
   const [data, setData] = useState({
-    name: editMode ? task.name || '' : '',
-    description: editMode ? task.description || '' : '',
-    endDate: editMode && task.endDate ? new Date(task.endDate).toISOString().split('T')[0] : '',
+    name: editMode ? task.name || "" : "",
+    description: editMode ? task.description || "" : "",
+    endDate:
+      editMode && task.endDate
+        ? new Date(task.endDate).toISOString().split("T")[0]
+        : "",
   });
 
   const updateData = async () => {
     try {
       if (editMode) {
         const success = await editTask(task.id, data);
-  
+
         if (success) {
           setShowModal(false);
         }
       } else {
-        const success = await addTask(data.name, data.description, data.endDate);
-  
+        const success = await addTask(
+          data.name,
+          data.description,
+          data.endDate
+        );
+
         if (success) {
           setShowModal(false);
         }
@@ -29,24 +36,29 @@ const Modal = ({ mode, setShowModal, task }) => {
       console.error(err);
     }
   };
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-  
+
     setData((prevData) => ({
       ...prevData,
-      [name]: name === 'endDate' ? (value ? new Date(value).toISOString().split('T')[0] : null) : value,
+      [name]:
+        name === "endDate"
+          ? value
+            ? new Date(value).toISOString().split("T")[0]
+            : null
+          : value,
     }));
   };
-  
+
   return (
     <div className="overlay">
       <div className="modal">
         <div className="form-title-container">
-          <h3>{mode === 'edit' ? 'Edit' : 'Add'} To-Do</h3>
+          <h3>{mode === "edit" ? "Edit" : "Add"} To-Do</h3>
           <button onClick={() => setShowModal(false)}>X</button>
         </div>
-  
+
         <form>
           <input
             required
@@ -73,11 +85,7 @@ const Modal = ({ mode, setShowModal, task }) => {
           />
           <br />
           <br />
-          <input
-            className={mode}
-            type="submit"
-            onClick={updateData}
-          />
+          <input className={mode} type="submit" onClick={updateData} />
         </form>
       </div>
     </div>

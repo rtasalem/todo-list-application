@@ -10,6 +10,7 @@ const priorityController = require("./controller/PriorityController.js");
 
 const PORT = 8088;
 const app = express();
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET_KEY || "keyboard cat",
