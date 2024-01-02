@@ -14,7 +14,7 @@ const ListHeader = () => {
         <div className="list-header">
             <h1>📋 Hello. Welcome to your To-Do List.</h1>
             <div className="button-container">
-                <button className="create" onClick={() => setShowModal(true)}>ADD NEW</button>
+                <Icon icon={BsCalendar2Date} className={"icon"} />
                 <Icon icon={BsFillGearFill} className="icon" />
 
                 <a href="/calendar" onClick={navigateToCalendar}>

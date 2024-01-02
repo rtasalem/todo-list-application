@@ -1,80 +1,83 @@
 const { MediaBlob } = require("../database/associations.js");
 
 const MediaBlobService = {
-  async getAllMediaBlobs() {
+  //Get all Media:
+  async getAllTasks() {
     try {
-      const tasks = await MediaBlob.findAll();
-      return tasks;
+      const media = await MediaBlob.findAll();
+      return media;
     } catch (err) {
-      console.error("Error fetching mediaBlobs:", err.message);
+      console.error("Error fetching media: ", err.message);
       throw err;
     }
   },
 
-  async getMediaBlobById(mediaBlobId) {
+  //Get Media by Id:
+  async getMediaById(id) {
     try {
-      const mediaBlob = await MediaBlob.findByPk(mediaBlobId);
-      if (!mediaBlob) {
-        throw new Error("MediaBlob not found.");
-      } else {
-        return mediaBlob;
+      const media = await MediaBlob.findByPk(id);
+      if (!media) {
+        throw new Error("Media not found.");
       }
+      return media;
     } catch (err) {
-      console.error("Error fetching mediaBlob by id:", err.message);
+      console.error("Error fetching media by id");
       throw err;
     }
   },
 
-  async createMediaBlob(mediaBlobData) {
+  //Create Media:
+  async createMedia(mediaData) {
     try {
-      const newMediaBlob = await MediaBlob.create(mediaBlobData);
-      return newMediaBlob;
+      const newMedia = await MediaBlob.create(mediaData);
+      return newMedia;
     } catch (err) {
-      console.error("Error creating mediaBlob:", err.message);
+      console.error("Error creating media: ", err.message);
       throw err;
     }
   },
 
-  async updateMediaBlob(mediaBlobId, updatedMediaBlobData) {
+  //Update Media:
+  async updateMedia(id, updatedMediaData) {
     try {
-      const mediaBlob = await MediaBlob.findByPk(mediaBlobId);
-      if (!mediaBlob) {
-        throw new Error("MediaBlob not found.");
-      } else {
-        await mediaBlob.update(updatedMediaBlobData);
-        return mediaBlob;
+      const media = await MediaBlob.findByPk(id);
+      if (!media) {
+        throw new Error("Media not found");
       }
+      await media.update(updatedMediaData);
+      return media;
     } catch (err) {
-      console.error("Error updating mediaBlob:", err.message);
+      console.error("Error updating Media: ", err.message);
       throw err;
     }
   },
 
-  async patchMediaBlob(mediaBlobId, patchedMediaBlobData) {
+  //Patch Media:
+  async patchMedia(id, patchedMediaData) {
     try {
-      const mediaBlob = await MediaBlob.findByPk(mediaBlobId);
-      if (!mediaBlob) {
-        throw new Error("MediaBlob not found.");
-      } else {
-        await mediaBlob.update(patchedMediaBlobData);
-        return mediaBlob;
+      const media = await MediaBlob.findByPk(id);
+      if (!media) {
+        throw new Error("Media not found");
       }
+      await media.update(patchedMediaData);
+      return media;
     } catch (err) {
-      console.error("Error patching mediaBlob:", err.message);
+      console.error("Error patching task: ", err.message);
       throw err;
     }
   },
 
-  async deleteMediaBlobById(mediaBlobId) {
+  //Delete Media:
+  async deleteMedia(id) {
     try {
-      const mediaBlob = await MediaBlob.findByPk(mediaBlobId);
-      if (!mediaBlob) {
-        return null;
+      const media = await MediaBlob.findByPk(id);
+      if (!media) {
+        throw new Error("Media not found");
       }
-      await mediaBlob.destroy();
-      return { message: "MediaBlob successfully deleted." };
+      await media.destroy();
+      return { message: "Media successfully deleted." };
     } catch (err) {
-      console.error("Error deleting mediaBlob:", err.message);
+      console.error("Error deleting task", err.message);
       throw err;
     }
   },
