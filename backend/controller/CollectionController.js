@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const CollectionService = require("../service/CollectionService");
-const checkLogin = require("../middleware/checkLogin.js");
 const handleError = require("../middleware/handleError.js");
 
 router.use(handleError);

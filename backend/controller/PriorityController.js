@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const PriorityService = require("../service/PriorityService");
-const checkLogin = require("../middleware/checkLogin.js");
 const handleError = require("../middleware/handleError.js");
 
 router.use(handleError);

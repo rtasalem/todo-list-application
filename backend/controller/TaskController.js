@@ -1,9 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const TaskService = require("../service/TaskService");
-const checkLogin = require("../middleware/checkLogin.js");
 const handleError = require("../middleware/handleError.js");
-const Priority = require("../database/model/Priority");
 
 router.use(handleError);
 
