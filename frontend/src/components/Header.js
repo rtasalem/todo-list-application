@@ -18,7 +18,7 @@ const ListHeader = () => {
   };
   return (
     <div className="list-header">
-      <h1>📋 Hello. Welcome to your To-Do List.</h1>
+      <h1>📋 Welcome to your To-Do List.</h1>
       <div className="button-container">
         <Icon icon={BsCalendar2Date} className={"icon"} />
         <Icon icon={BsFillGearFill} className="icon" />
