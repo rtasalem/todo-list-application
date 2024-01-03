@@ -1,4 +1,4 @@
-const { Task, Priority } = require("../database/associations.js");
+const { Task } = require("../database/associations.js");
 
 const TaskService = {
   // Get all tasks
@@ -17,7 +17,7 @@ const TaskService = {
     try {
       const task = await Task.findByPk(id);
       if (!task) {
-        throw new Error(`Task with id of ${id} not found.`);
+        throw new Error("Task not found.");
       }
       return task;
     } catch (err) {
@@ -42,7 +42,7 @@ const TaskService = {
     try {
       const task = await Task.findByPk(id);
       if (!task) {
-        throw new Error(`Task with id of ${id} not found.`);
+        throw new Error("Task not found.");
       } else {
         await task.update(updatedTaskData);
         return task;
@@ -58,7 +58,7 @@ const TaskService = {
     try {
       const task = await Task.findByPk(id);
       if (!task) {
-        throw new Error(`Task with id of ${id} not found.`);
+        throw new Error("Task not found.");
       } else {
         await task.update(patchedTaskData);
         return task;
@@ -80,23 +80,6 @@ const TaskService = {
       return { message: "Task successfully deleted." };
     } catch (err) {
       console.error("Error deleting task:", err.message);
-      throw err;
-    }
-  },
-  async getPriorityByTaskId(taskId) {
-    try {
-      const task = await Task.findByPk(taskId, {
-        include: [{ model: Priority, attributes: ["id", "name", "color"] }],
-      });
-
-      if (!task || !task.Priority) {
-        throw new Error("Priority not found for the given taskId.");
-      }
-
-      const { id, name, color } = task.Priority;
-      return { id, name, color };
-    } catch (err) {
-      console.error("Error getting Priority by TaskId:", err.message);
       throw err;
     }
   },
