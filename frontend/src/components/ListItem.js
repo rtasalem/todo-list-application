@@ -2,8 +2,15 @@ import React, { useState } from "react";
 import TodoListIconBar from "./TodoListIconBar";
 import Modal from "./Modal";
 import { deleteTask, updateTaskCompletionStatus } from "../services/api";
+import FlagIcon from "./FlagIcon";
 
-const ListItem = ({ task, onDeleteSuccess }) => {
+const ListItem = ({
+  task,
+  onDeleteSuccess,
+  onFlagDeleteSuccess,
+  onSaveFlagSuccess,
+  onDeleteFlag,
+}) => {
   const [showModal, setShowModal] = useState(false);
   const [completed, setCompleted] = useState(task.completed);
 
@@ -33,6 +40,15 @@ const ListItem = ({ task, onDeleteSuccess }) => {
         editItem={() => setShowModal(true)}
         deleteItem={deleteItem}
         completed={completed}
+      />
+      <FlagIcon
+        key={`${task.id}-${task.flag.id}`}
+        taskId={task.id}
+        initialColor={task.flag.color}
+        initialName={task.flag.name}
+        initialFlagId={task.flag.id}
+        onDeleteFlag={onDeleteFlag}
+        onSaveFlagSuccess={onSaveFlagSuccess}
       />
       {showModal && (
         <Modal mode={"edit"} setShowModal={setShowModal} task={task} />

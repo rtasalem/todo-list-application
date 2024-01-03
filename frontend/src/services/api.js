@@ -6,7 +6,7 @@ export const getTasks = async () => {
     const response = await axios.get("http://localhost:8088/api/v1/tasks");
 
     if (response.status === 200) {
-      return response.data;
+      return response;
     } else {
       console.error("Failed to fetch tasks.");
       return [];

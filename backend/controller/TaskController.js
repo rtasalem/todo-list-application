@@ -3,6 +3,7 @@ const router = express.Router();
 const TaskService = require("../service/TaskService");
 const checkLogin = require("../middleware/checkLogin.js");
 const handleError = require("../middleware/handleError.js");
+const Priority = require("../database/model/Priority");
 
 router.use(handleError);
 
@@ -90,6 +91,25 @@ router.delete("/:id", async (req, res) => {
     }
   } catch (err) {
     res.status(500).json({ message: "Error deleting task." });
+  }
+});
+
+//get a priority by taskId
+router.get("/priority/:taskId", async (req, res) => {
+  const taskId = req.params.taskId;
+
+  try {
+    const priority = await TaskService.getPriorityByTaskId(taskId);
+
+    if (!priority) {
+      res
+        .status(404)
+        .json({ message: "Priority not found for the given taskId." });
+    } else {
+      res.status(200).json(priority);
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
