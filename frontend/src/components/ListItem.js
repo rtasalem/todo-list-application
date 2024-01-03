@@ -1,16 +1,14 @@
-import { useState } from "react";
-import React from "react";
+import React, { useState } from "react";
 import TodoListIconBar from "./TodoListIconBar";
 import Modal from "./Modal";
-import FlagIcon from "./FlagIcon"; // Correct import statement
 import { deleteTask, updateTaskCompletionStatus } from "../services/api";
+import FlagIcon from "./FlagIcon";
 
 const ListItem = ({
   task,
   onDeleteSuccess,
   onFlagDeleteSuccess,
   onSaveFlagSuccess,
-  editItem,
   onDeleteFlag,
 }) => {
   const [showModal, setShowModal] = useState(false);
@@ -31,12 +29,18 @@ const ListItem = ({
   };
 
   return (
-    <li className="form-container">
+    <li className={`form-container ${completed ? "completed" : ""}`}>
       <div className="info-container">
-        <p className="task-name">{task.name}</p>
+        <p className={`task-name ${completed ? "completed" : ""}`}>
+          {task.name}
+        </p>
       </div>
-
-      <TodoListIconBar deleteItem={deleteItem} />
+      <TodoListIconBar
+        checkItem={toggleComplete}
+        editItem={() => setShowModal(true)}
+        deleteItem={deleteItem}
+        completed={completed}
+      />
       <FlagIcon
         key={`${task.id}-${task.flag.id}`}
         taskId={task.id}

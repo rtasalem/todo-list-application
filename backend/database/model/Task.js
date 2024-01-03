@@ -13,8 +13,15 @@ const Task = sequelize.define(
       type: DataTypes.STRING(50),
       allowNull: false,
     },
-    description: DataTypes.TEXT,
-    endDate: DataTypes.DATE,
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    endDate: {
+      type: DataTypes.DATEONLY,
+      allowNull: true,
+      defaultValue: null,
+    },
     completed: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,

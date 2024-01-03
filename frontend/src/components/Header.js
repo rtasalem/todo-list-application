@@ -1,27 +1,24 @@
 import { useState } from "react";
-
 import {
   BsCalendar,
-  BsFillGearFill,
-  BsHouse,
   BsCalendar2Date,
+  BsHouse,
+  BsFillGearFill,
 } from "react-icons/bs";
 import Icon from "./icons/Icon";
 import Modal from "./Modal";
 
 const ListHeader = () => {
   const [showModal, setShowModal] = useState(false);
-
   const {
     navigateToCalendar,
     navigateToHome,
   } = () => {
     window.location.href = "/calendar";
   };
-
   return (
     <div className="list-header">
-      <h1>📋 Hello. Welcome to your To-Do List.</h1>
+      <h1>📋 Welcome to your To-Do List.</h1>
       <div className="button-container">
         <Icon icon={BsCalendar2Date} className={"icon"} />
         <Icon icon={BsFillGearFill} className="icon" />

@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const TaskService = require("../service/TaskService");
-const Priority = require("../database/model/Priority");
-const checkLogin = require("../middleware/checkLogin.js");
 const handleError = require("../middleware/handleError.js");
 
 router.use(handleError);
@@ -23,7 +21,7 @@ router.get("/:id", async (req, res) => {
   try {
     const task = await TaskService.getTaskById(id);
     if (!task) {
-      res.status(404).json({ message: `Task with id of ${id} not found.` });
+      res.status(404).json({ message: "Task not found." });
     } else {
       res.status(200).json(task);
     }
@@ -85,7 +83,7 @@ router.delete("/:id", async (req, res) => {
   try {
     const deletedTask = await TaskService.deleteTaskById(id);
     if (!deletedTask) {
-      res.status(404).json({ message: `Task with id of ${id} not found.` });
+      res.status(404).json({ message: "Task not found." });
     } else {
       res.status(200).json({ message: "Task deleted successfully." });
     }

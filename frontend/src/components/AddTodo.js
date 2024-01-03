@@ -1,5 +1,4 @@
 import { useState } from "react";
-import axios from "axios";
 import AddTodoIconBar from "./AddTodoIconBar";
 import Modal from "./Modal";
 import { addTask } from "../services/api";

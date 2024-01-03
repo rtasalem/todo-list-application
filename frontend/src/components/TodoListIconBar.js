@@ -3,7 +3,6 @@ import { BsImage, BsPlayCircle } from "react-icons/bs";
 import CheckBoxIcon from "./icons/CheckBoxIcon";
 import EditIcon from "./icons/EditIcon";
 import TrashIcon from "./icons/TrashIcon";
-import FlagIcon from "./FlagIcon";
 
 const TodoListIconBar = ({ checkItem, completed, editItem, deleteItem }) => {
   const iconArray = [BsImage, BsPlayCircle];

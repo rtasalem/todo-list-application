@@ -1,11 +1,10 @@
-// TodoList.js
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
 import ListItem from "./ListItem";
 import { getTasks, updateTaskCompletionStatus } from "../services/api";
 import { BsSearch } from "react-icons/bs";
 import { BsFilterSquare } from "react-icons/bs";
 import Icon from "./icons/Icon";
+import axios from "axios";
 
 const DEFAULT_FLAG = { name: "Black", color: "#000000" };
 const TodoList = () => {

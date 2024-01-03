@@ -137,6 +137,7 @@ const FlagIcon = ({
       }`}
     >
       <BsFlag
+        className="flag-icon"
         style={{ color: selectedColor.color }}
         onClick={() => setShowDropdown(!showDropdown)}
       />
@@ -172,8 +173,12 @@ const FlagIcon = ({
           </button>
         </div>
       )}
-      <p style={{ color: selectedColor.color }}>{flagName}</p>
-      <button onClick={handleDeleteFlag}>Delete Flag</button>
+      <p style={{ color: selectedColor.color }} className="flag-text">
+        {flagName}
+      </p>
+      <button onClick={handleDeleteFlag} className="delete-button">
+        Delete Flag
+      </button>
     </div>
   );
 };
