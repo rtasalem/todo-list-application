@@ -7,7 +7,6 @@ import FlagIcon from "./FlagIcon";
 const ListItem = ({
   task,
   onDeleteSuccess,
-  onFlagDeleteSuccess,
   onSaveFlagSuccess,
   onDeleteFlag,
 }) => {

@@ -1,4 +1,3 @@
-// FlagIcon.js
 import React, { useState, useEffect } from "react";
 import { BsFlag } from "react-icons/bs";
 import axios from "axios";
@@ -70,7 +69,6 @@ const FlagIcon = ({
 
       console.log("Flag saved:", response.data);
 
-      // Trigger the callback to update the entity
       onSaveFlagSuccess({
         flagId: localFlagId,
         flagName,
@@ -95,8 +93,6 @@ const FlagIcon = ({
         const response = await axios.delete(
           `http://localhost:8088/api/v1/priorities/${localFlagId}`
         );
-        console.log("Flag deleted:", response.data);
-        console.log(taskId);
         setLocalFlagId(null);
         onDeleteFlag();
         setSelectedColor(DEFAULT_FLAG.color);
@@ -121,14 +117,13 @@ const FlagIcon = ({
   }, [initialColor, initialName]);
 
   useEffect(() => {
-    // Reset state after the flag is deleted or updated
     if (!initialFlagId) {
       setSelectedColor(DEFAULT_FLAG);
       setFlagName("");
       setLocalFlagId(null);
       setShowDropdown(false);
     }
-  }, [initialFlagId]); // Run this effect when initialFlagId changes
+  }, [initialFlagId]);
 
   return (
     <div
