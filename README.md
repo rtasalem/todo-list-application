@@ -4,7 +4,7 @@ Laila Al-Eissa ([LinkedIn](https://www.linkedin.com/in/lailaaleissa/) | [GitHub]
 ## Background
 The developers behind this To-Do List Application are all software developers (IT consultants) at FDM Group. To prepare for a 2-year assignment with DEFRA (Department for Environment, Food and Rural Affairs), the team built this application as way of up-skilling in various technologies (see below) that they will be using while working amongst different development teams within DEFRA.
 ## Team Organisation
-The Scrum methodology was adopted by the team with the project taking 3 sprints to complete. For the distribution and breakdown of tasks, the team used Kanban boards and product/sprint backlogs via Jira.
+The Scrum methodology was adopted by the team with the project taking 3 sprints (each lasting 1 week) to complete. For the distribution and breakdown of tasks, the team used Kanban boards and product/sprint backlogs via [Jira](https://www.atlassian.com/software/jira).
 ## Libraries & Technologies
 - [Node.js](https://nodejs.org/en) & [Express.js](https://expressjs.com/): Backend functionality (CRUD implementation)
 - [Jest](https://jestjs.io/): Unit testing
