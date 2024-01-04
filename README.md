@@ -15,7 +15,7 @@ The Scrum methodology was adopted by the team with the project taking 3 sprints 
 - [Amazon S3 Bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingBucket.html): Media file storage
 - [PostgreSQL](https://www.postgresql.org/) & [pgAdmin 4](https://www.pgadmin.org/): Database setup
 ## Getting Started
-After cloning the repository and opening the project, ensure Docker is running locally run the following commands in the terminal:
+After cloning the repository and opening the project, ensure Docker is running locally and run the following commands in the terminal:
 - `cd frontend`
 - `npm install`
 - `cd ..`
@@ -23,4 +23,4 @@ After cloning the repository and opening the project, ensure Docker is running l
 - `npm install`
 - `docker compose up -d`
 
-Once the todo-list-application contianer has been built, enter localhost:3000 into the browser to view the application and experience the functionality as a user.
+Once the todo-list-application container has been built, enter localhost:3000 into the browser to view the application and experience the functionality as a user.
