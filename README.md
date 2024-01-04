@@ -6,14 +6,14 @@ The developers behind this To-Do List Application are all software developers (I
 ## Team Organisation
 The Scrum methodology was adopted by the team with the project taking 3 sprints to complete. For the distribution and breakdown of tasks, the team used Kanban boards and product/sprint backlogs via Jira.
 ## Libraries & Technologies
-- Node.js & Express.js: Backend functionality (CRUD implementation)
-- Jest: Unit testing
-- React.js: Frontend implementation
-- Selenium WebDriver & Mocha: Functional testing
-- Docker: Containerisation & image sharing
-- Postman: API testing
-- Amazon S3 Bucket: Media file storage
-- PostgreSQL & pgAdmin 4: Database setup
+- [Node.js](https://nodejs.org/en) & [Express.js](https://expressjs.com/): Backend functionality (CRUD implementation)
+- [Jest](https://jestjs.io/): Unit testing
+- [React.js](https://react.dev/): Frontend implementation
+- [Selenium WebDriver](https://www.selenium.dev/documentation/webdriver/) & [Mocha](https://mochajs.org/): Functional testing
+- [Docker](https://www.docker.com/): Containerisation & image sharing
+- [Postman](https://www.postman.com/): API testing
+- [Amazon S3 Bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingBucket.html): Media file storage
+- [PostgreSQL](https://www.postgresql.org/) & [pgAdmin 4](https://www.pgadmin.org/): Database setup
 ## Getting Started
 After cloning the repository and opening the project, ensure Docker is running locally run the following commands in the terminal:
 - `cd frontend`
@@ -22,3 +22,5 @@ After cloning the repository and opening the project, ensure Docker is running l
 - `cd backend`
 - `npm install`
 - `docker compose up -d`
+
+Once the todo-list-application contianer has been built, enter localhost:3000 into the browser to view the application and experience the functionality as a user.
