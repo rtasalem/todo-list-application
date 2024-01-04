@@ -83,6 +83,7 @@ const TaskService = {
       throw err;
     }
   },
+
   async getPriorityByTaskId(taskId) {
     try {
       const task = await Task.findByPk(taskId, {
